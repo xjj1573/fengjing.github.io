@@ -1,0 +1,269 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Vuex | title</title><meta name="author" content="杨函数"><meta name="copyright" content="杨函数"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一、什么是Vuex Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式。 它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。 Vuex 也集成到 Vue 的官方调试工具 **devtools extension (opens new window)**，提供了诸如零配置的 time-travel 调试、状态快照导入导出等高级调试功能。 关键词：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vuex">
+<meta property="og:url" content="http://example.com/2021/04/22/Vuex/index.html">
+<meta property="og:site_name" content="title">
+<meta property="og:description" content="一、什么是Vuex Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式。 它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。 Vuex 也集成到 Vue 的官方调试工具 **devtools extension (opens new window)**，提供了诸如零配置的 time-travel 调试、状态快照导入导出等高级调试功能。 关键词：">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-04-22T14:10:14.000Z">
+<meta property="article:modified_time" content="2022-11-22T13:51:25.583Z">
+<meta property="article:author" content="杨函数">
+<meta name="twitter:card" content="summary"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2021/04/22/Vuex/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Vuex',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2022-11-22 21:51:25'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar2.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">title</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Vuex</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">发表于</span><time datetime="2021-04-22T14:10:14.000Z" title="发表于 2021-04-22 22:10:14">2021-04-22</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Vuex"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong>一、什么是</strong><a target="_blank" rel="noopener" href="https://vuex.vuejs.org/zh/"><strong>Vuex</strong></a></p>
+<p><strong>Vuex 是一个专为 Vue.js 应用程序开发的<strong><strong>状态管理模式</strong></strong>。</strong></p>
+<p><strong>它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。</strong></p>
+<p><strong>Vuex 也集成到 Vue 的官方调试工具</strong> **devtools extension (opens new window)**<strong>，提供了诸如零配置的 time-travel 调试、状态快照导入导出等高级调试功能。</strong></p>
+<p><strong>关键词：****状态管理  规则  状态可追踪  可预测</strong></p>
+<p><strong>vuex其实就是一个数据仓库</strong></p>
+<p><strong>二、为什么使用Vuex</strong></p>
+<p><strong>Vuex可用于解决项目中传递复杂但共用的数据，将这些数据存储在公共的状态管理器内，供各个页面 &#x2F; 组件使用。</strong></p>
+<p><strong>但是Vuex不是必需的，根据项目大小及项目中状态管理的复杂程度来决定是否使用Vuex。</strong></p>
+<p><strong>Vuex的功能其实可以通过父子组件传值或BUS等方式均可以解决。</strong></p>
+<p><strong>三、安装与配置</strong></p>
+<p><strong>1、安装依赖</strong></p>
+<p>npm install vuex –save</p>
+<p><strong>2、配置</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// src/store/index.js</span><br><span class="line">import Vue from &quot;vue&quot;</span><br><span class="line">// 引入依赖</span><br><span class="line">import Vuex from &quot;vuex&quot;</span><br><span class="line"></span><br><span class="line">// 注册</span><br><span class="line">Vue.use(Vuex);</span><br><span class="line"></span><br><span class="line">//导出状态管理器</span><br><span class="line">export default new Vuex.Store(&#123;</span><br><span class="line">    // 需要管理的状态数据</span><br><span class="line">    state: &#123;&#125;,</span><br><span class="line">    // 类似计算属性，对状态进行筛选等操作</span><br><span class="line">    getters: &#123;&#125;,</span><br><span class="line">    // 操作数据处理的方法，且是唯一可以操作数据的方式</span><br><span class="line">    mutation: &#123;&#125;,</span><br><span class="line">    // 允许异步处理的操作</span><br><span class="line">    actions: &#123;&#125;,</span><br><span class="line">    // 模块化管理</span><br><span class="line">    modules: &#123;&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// main.js</span><br><span class="line">import store from &quot;./store&quot;;</span><br><span class="line"></span><br><span class="line">// 全局注册状态管理器</span><br><span class="line">new Vue(&#123;</span><br><span class="line">    router,</span><br><span class="line">    store</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>四、Vuex的核心概念</strong></p>
+<p><strong>1、state —— mapState</strong></p>
+<p><strong>Vuex唯一的数据源，内部存放需要集中管理的状态数据</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">state: &#123;    </span><br><span class="line">	count: 10</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>（1）数据 Store &#x2F; state 中的的获取</strong></p>
+<p><strong>由于状态值可能会发生变化，因此我们通常在computed中获取状态值，当state值发生变化时，computed会自动计算更新。</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/// About.vue</span><br><span class="line">computed: &#123;</span><br><span class="line">    count() &#123;</span><br><span class="line">        return this.$store.state.count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>（2）辅助函数 ——</strong> <strong>mapState</strong></p>
+<p><strong>将state中的属性值进行映射</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// About.vue</span><br><span class="line">&lt;div&gt;获取到的count值：&#123;&#123; count &#125;&#125;&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">// 引入辅助函数</span><br><span class="line">import &#123; mapState &#125; from &quot;vuex&quot;;</span><br><span class="line"></span><br><span class="line">computed: &#123;</span><br><span class="line">    // 使用ES6的语法将需要用到的状态值解构出来，可在页面中直接使用</span><br><span class="line">    ...mapState([&#x27;count&#x27;]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>通过mapState获取的数据可以自定义名称</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// About.vue</span><br><span class="line">&lt;div&gt;获取到的count值：&#123;&#123; num &#125;&#125;&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">// 引入辅助函数</span><br><span class="line">import &#123; mapState &#125; from &quot;vuex&quot;;</span><br><span class="line"></span><br><span class="line">computed: &#123;</span><br><span class="line">    // 使用ES6的语法将需要用到的状态值解构出来，可在页面中直接使用</span><br><span class="line">    ...mapState(&#123;num: &#x27;count&#x27;&#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>2、getters —— mapGetters</strong></p>
+<p><strong>可对状态数据进行筛选等进一步处理后再返回给组件</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">state: &#123;</span><br><span class="line">    count: 10,</span><br><span class="line">    list: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</span><br><span class="line">&#125;,</span><br><span class="line">getters: &#123;</span><br><span class="line">    filterList(state) &#123;</span><br><span class="line">        // 筛选list中的偶数</span><br><span class="line">        return state.list.filter(item =&gt; &#123;</span><br><span class="line">            return item % 2 === 0</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// About.vue</span><br><span class="line">&lt;div&gt;获取到的getters值：&#123;&#123; getArr &#125;&#125;&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">// 引入辅助函数</span><br><span class="line">import &#123; mapState &#125; from &quot;vuex&quot;;</span><br><span class="line"></span><br><span class="line">computed: &#123;</span><br><span class="line">    getArr() &#123;</span><br><span class="line">        return this.$store.getters.filterList;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>（1）辅助函数 ——</strong> <strong>mapGetters</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// About.vue</span><br><span class="line">&lt;div&gt;获取到的count值：&#123;&#123; filterList &#125;&#125;&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">// 引入辅助函数</span><br><span class="line">import &#123; mapState, mapGetters &#125; from &quot;vuex&quot;;</span><br><span class="line"></span><br><span class="line">computed: &#123;</span><br><span class="line">    // 使用ES6的语法将需要用到的状态值解构出来，可在页面中直接使用</span><br><span class="line">    ...mapGetters ([&#x27;filterList&#x27;]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>通过mapGetters获取的数据可以自定义名称</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// About.vue</span><br><span class="line">&lt;div&gt;获取到的count值：&#123;&#123; getArr &#125;&#125;&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">// 引入辅助函数</span><br><span class="line">import &#123; mapState, mapGetters &#125; from &quot;vuex&quot;;</span><br><span class="line"></span><br><span class="line">computed: &#123;</span><br><span class="line">    // 使用ES6的语法将需要用到的状态值解构出来，可在页面中直接使用</span><br><span class="line">    ...mapGetters (&#123;getArr: &#x27;filterList&#x27;&#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>3、mutations —— mapMutation</strong></p>
+<p><strong>唯一可操作改变state数据的方式，通过commit触发修改</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">state: &#123;</span><br><span class="line">    count: 10</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line">mutations: &#123;</span><br><span class="line">    add(state) &#123;</span><br><span class="line">        state.count++;</span><br><span class="line">    &#125;,</span><br><span class="line">    reduce(state) &#123;</span><br><span class="line">        state.count--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// About.vue</span><br><span class="line">&lt;div&gt;获取到的mutation操作后的值：&#123;&#123; getArr &#125;&#125;&lt;/div&gt;</span><br><span class="line">&lt;button @click=&quot;handleAdd&quot;&gt; + &lt;/button&gt;</span><br><span class="line">&lt;button @click=&quot;handleReduce&quot;&gt; - &lt;/button&gt;</span><br><span class="line"></span><br><span class="line">// 引入辅助函数</span><br><span class="line">import &#123; mapState &#125; from &quot;vuex&quot;;</span><br><span class="line"></span><br><span class="line">methods: &#123;</span><br><span class="line">    handleAdd() &#123;</span><br><span class="line">        this.$state.commit(&#x27;add&#x27;);</span><br><span class="line">    &#125;,</span><br><span class="line">    handleReduce() &#123;</span><br><span class="line">        this.$state.commit(&#x27;reduce&#x27;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>（1）传递参数</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">methods: &#123;</span><br><span class="line">    handleAdd() &#123;</span><br><span class="line">        // 通过对象的方式传递多个值</span><br><span class="line">        this.$state.commit(&#x27;add&#x27;, &#123;num1: 100, num2: 10&#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">    handleReduce() &#123;</span><br><span class="line">        this.$state.commit(&#x27;reduce&#x27;, 50);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">methods: &#123;</span><br><span class="line">    handleAdd() &#123;</span><br><span class="line">        // 通过对象的方式传递多个值</span><br><span class="line">        this.$state.commit(&#x27;add&#x27;, &#123;num1: 100, num2: 10&#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">    handleReduce() &#123;</span><br><span class="line">        this.$state.commit(&#x27;reduce&#x27;, 50);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>（2）新增状态属性****！！！</strong></p>
+<p><strong>需要遵循Vue的相应规则，不能直接操作状态对象通过Object.key &#x3D; val的方式进行新增状态值</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mutations: &#123;</span><br><span class="line">    newState(state) &#123;</span><br><span class="line">        Vue.set(state, &#x27;newStateName&#x27;, newStateVal);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>或者</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mutations: &#123;</span><br><span class="line">    newState(state) &#123;</span><br><span class="line">        this.replaceState(&#123;...state, newStateName: newStateVal&#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">methods: &#123;</span><br><span class="line">    handleAdd() &#123;</span><br><span class="line">        // 通过对象的方式传递多个值</span><br><span class="line">        this.$state.commit(&#x27;add&#x27;, &#123;num1: 100, num2: 10&#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">    handleReduce() &#123;</span><br><span class="line">        this.$state.commit(&#x27;reduce&#x27;, 50);</span><br><span class="line">        // 触发添加新值</span><br><span class="line">        this.$state.commit(&#x27;newState&#x27;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br><span class="line">computed: &#123;</span><br><span class="line">    ...mapState(&#123;</span><br><span class="line">        newVal: state =&gt; (state.newStateName ? state.newStateName  : &quot;还没有设置新值&quot;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>（3）辅助函数 ——</strong> <strong>mapMutations</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// About.vue</span><br><span class="line">&lt;div&gt;获取到的count值：&#123;&#123; handleNewState&#125;&#125;&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">// 引入辅助函数</span><br><span class="line">import &#123; mapState, mapGetters, mapMutations &#125; from &quot;vuex&quot;;</span><br><span class="line"></span><br><span class="line">methods: &#123;</span><br><span class="line">    // 使用ES6的语法将需要用到的状态值解构出来，可在页面中直接使用</span><br><span class="line">    ...mapMutations(&#123;</span><br><span class="line">        handleReduce: &#x27;reduce&#x27;,</span><br><span class="line">        handleAdd: &#x27;add&#x27;,</span><br><span class="line">        handleNewState: &#x27;newState&#x27;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>4、actions —— mapActions</strong></p>
+<p><strong>处理异步操作，使用时通过dispatch来派发</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mutations: &#123;</span><br><span class="line">  changeCount(state, newState) &#123;</span><br><span class="line">      return (state.count = newState.count)</span><br><span class="line">  &#125;  </span><br><span class="line">&#125;,</span><br><span class="line">actions: &#123;</span><br><span class="line">    // context: 上下文</span><br><span class="line">    // newVal：接收的参数</span><br><span class="line">    modifyCount(context, newVal) &#123;</span><br><span class="line">        // 模拟异步</span><br><span class="line">        setTimeout(() =&gt; &#123;</span><br><span class="line">            context.commit(&#x27;changeCount&#x27;， &#123;count: newVal&#125;)</span><br><span class="line">        &#125;, 2000)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// About.vue</span><br><span class="line">&lt;div&gt;获取到的mutation操作后的值：&#123;&#123; getArr &#125;&#125;&lt;/div&gt;</span><br><span class="line">&lt;button @click=&quot;handleAction&quot;&gt; change &lt;/button&gt;</span><br><span class="line"></span><br><span class="line">// 引入辅助函数</span><br><span class="line">import &#123; mapState &#125; from &quot;vuex&quot;;</span><br><span class="line"></span><br><span class="line">methods: &#123;</span><br><span class="line">    handleAction() &#123;</span><br><span class="line">        this.$state.dispatch(&#x27;modifyCount&#x27;, 200);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>（1）辅助函数 ——</strong> <strong>mapActions</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// About.vue</span><br><span class="line">// 在调用方法时进行传值</span><br><span class="line">&lt;button @click=&quot;handleAction(&#123;num: 200&#125;)&quot;&gt; change &lt;/button&gt;</span><br><span class="line"></span><br><span class="line">// 引入辅助函数</span><br><span class="line">import &#123; mapState, mapGetters, mapMutations, mapActions &#125; from &quot;vuex&quot;;</span><br><span class="line"></span><br><span class="line">methods: &#123;</span><br><span class="line">    // 使用ES6的语法将需要用到的状态值解构出来，可在页面中直接使用</span><br><span class="line">    ...mapActions(&#123;</span><br><span class="line">        handleAction: &#x27;modifyCount&#x27;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>5、module</strong></p>
+<p><strong>随着项目的不断迭代壮大，状态管理器也会随之变得更大，更繁杂，因此我们可以通过module对状态进行模块化管理</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// store/index.js</span><br><span class="line">const moudleA = &#123;</span><br><span class="line">    state: &#123;</span><br><span class="line">        name: &#x27;M1&#x27;</span><br><span class="line">    &#125;,</span><br><span class="line">    getters: &#123;&#125;,</span><br><span class="line">    mutations: &#123;&#125;,</span><br><span class="line">    actions: &#123;&#125;,</span><br><span class="line">    module: &#123;&#125;</span><br><span class="line">&#125;,</span><br><span class="line">const moudleB = &#123;</span><br><span class="line">    state: &#123;</span><br><span class="line">        name: &#x27;M2&#x27;</span><br><span class="line">    &#125;,</span><br><span class="line">    getters: &#123;&#125;,</span><br><span class="line">    mutations: &#123;&#125;,</span><br><span class="line">    actions: &#123;&#125;,</span><br><span class="line">    module: &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//导出状态管理器</span><br><span class="line">export default new Vuex.Store(&#123;</span><br><span class="line">    state: &#123;&#125;,</span><br><span class="line">    getters: &#123;&#125;,</span><br><span class="line">    mutation: &#123;&#125;,</span><br><span class="line">    actions: &#123;&#125;,</span><br><span class="line">    modules: &#123;</span><br><span class="line">        // 声明模块</span><br><span class="line">        m1: moduleA,</span><br><span class="line">        m2: moduleB</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>（1）获取不同模块中的数据</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// About.vue</span><br><span class="line">// 在调用方法时进行传值</span><br><span class="line">&lt;button @click=&quot;handleAction(&#123;num: 200&#125;)&quot;&gt; change &lt;/button&gt;</span><br><span class="line"></span><br><span class="line">// 引入辅助函数</span><br><span class="line">import &#123; mapState, mapGetters, mapMutations, mapActions &#125; from &quot;vuex&quot;;</span><br><span class="line"></span><br><span class="line">computed: &#123;</span><br><span class="line">    moduleName() &#123;</span><br><span class="line">        return this.$store.state.m1.name;</span><br><span class="line">    &#125;,</span><br><span class="line">    moduleName2() &#123;</span><br><span class="line">        return this.$store.state.m2.name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>（2）在子模块中获取全局状态数据</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const moudleB = &#123;</span><br><span class="line">    state: &#123;</span><br><span class="line">        name: &#x27;M2&#x27;</span><br><span class="line">    &#125;,</span><br><span class="line">    getters: &#123;&#125;,</span><br><span class="line">    mutations: &#123;</span><br><span class="line">        subAdd(state) &#123;</span><br><span class="line">            return state.name;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    actions: &#123;</span><br><span class="line">        // state：当前状态模块中的属性值</span><br><span class="line">        // commit：触发当前模块内的方法</span><br><span class="line">        // rootState：全局状态管理器</span><br><span class="line">        modifyCount(&#123;state, commit, rootState&#125;) &#123;</span><br><span class="line">            // 模拟异步</span><br><span class="line">            setTimeout(() =&gt; &#123;</span><br><span class="line">                console.log(state.name, rootState.count)</span><br><span class="line">                commit(&#x27;subAdd&#x27;);</span><br><span class="line">            &#125;, 2000)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    module: &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>默认情况下mutations，Actions,gettres是注册在全局上的，可以直接调用</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// About.vue</span><br><span class="line">// 在调用方法时进行传值</span><br><span class="line">&lt;button @click=&quot;actionB&quot;&gt; change &lt;/button&gt;</span><br><span class="line"></span><br><span class="line">// 引入辅助函数</span><br><span class="line">import &#123; mapState, mapGetters, mapMutations, mapActions &#125; from &quot;vuex&quot;;</span><br><span class="line"></span><br><span class="line">methods: &#123;</span><br><span class="line">    actionB() &#123;</span><br><span class="line">        return this.$store.dispatch(&quot;modifyCount&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>（3）</strong> <strong>namespaces</strong></p>
+<p><strong>为了更好的实现模块化，我们通常会使用namespaced来对模块进行区分，此时gettters、action、mutations、actions都只能具体指定到模块调用</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const moudleB = &#123;</span><br><span class="line">    namespaced: true,</span><br><span class="line">    state: &#123;</span><br><span class="line">        name: &#x27;M2&#x27;</span><br><span class="line">    &#125;,</span><br><span class="line">    getters: &#123;&#125;,</span><br><span class="line">    mutations: &#123;</span><br><span class="line">        subAdd(state) &#123;</span><br><span class="line">            return state.name;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    actions: &#123;</span><br><span class="line">        // state：当前状态模块中的属性值</span><br><span class="line">        // commit：触发当前模块内的方法</span><br><span class="line">        // rootState：全局状态管理器</span><br><span class="line">        // rootGetters：全局getters</span><br><span class="line">        modifyCount(&#123;state, commit, rootState, rootGetters&#125;) &#123;</span><br><span class="line">            // 模拟异步</span><br><span class="line">            setTimeout(() =&gt; &#123;</span><br><span class="line">                console.log(state.name, rootState.count)</span><br><span class="line">                commit(&#x27;subAdd&#x27;);</span><br><span class="line">                // 访问全局的mutations</span><br><span class="line">                commit(&quot;changeCount&quot;, null, &#123;root: true&#125;);</span><br><span class="line">                // 访问全局action</span><br><span class="line">                dispatch(&quot;changeCount&quot;, null, &#123;root: true&#125;)</span><br><span class="line">            &#125;, 2000)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    module: &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>namespaced</strong> <strong>情况下访问</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// About.vue</span><br><span class="line">// 在调用方法时进行传值</span><br><span class="line">&lt;button @click=&quot;actionB&quot;&gt; change &lt;/button&gt;</span><br><span class="line"></span><br><span class="line">// 引入辅助函数</span><br><span class="line">import &#123; mapState, mapGetters, mapMutations, mapActions &#125; from &quot;vuex&quot;;</span><br><span class="line"></span><br><span class="line">methods: &#123;</span><br><span class="line">    actionB() &#123;</span><br><span class="line">        return this.$store.dispatch(&quot;m2/modifyCount&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>（4） getters需要通过[]的方式进行访问</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">return this.$store.getters[&quot;m2/filteerList&quot;];</span><br></pre></td></tr></table></figure>
+
+<p><strong>访问全局getters</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">modifyCount(&#123;rootGetters&#125;) &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>（5）访问全局mutations</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">commit(&quot;changeCount&quot;, null, &#123;root: true&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>（6）访问全局action</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">dispatch(&quot;changeCount&quot;, null, &#123;root: true&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>6、createNamespacedHelpers</strong> </p>
+<p><strong>可以通过使用 createNamespacedHelpers 创建基于某个命名空间辅助函数。它返回一个对象，对象里有新的绑定在给定命名空间值上的组件绑定辅助函数</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const &#123; mapState, mapActions &#125; = createNamespacedHelpers(&#x27;m1 &#x27;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>二、项目结构</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">├── index.html</span><br><span class="line">├── main.js</span><br><span class="line">├── api</span><br><span class="line">│   └── ... # 抽取出API请求</span><br><span class="line">├── components</span><br><span class="line">│   ├── App.vue</span><br><span class="line">│   └── ...</span><br><span class="line">└── store</span><br><span class="line">    ├── index.js          # 我们组装模块并导出 store 的地方</span><br><span class="line">    ├── actions.js        # 根级别的 action</span><br><span class="line">    ├── mutations.js      # 根级别的 mutation</span><br><span class="line">    └── modules</span><br><span class="line">        ├── cart.js       # 购物车模块</span><br><span class="line">        └── products.js   # 产品模块</span><br></pre></td></tr></table></figure>
+
+<p><strong>Vuex 并不限制你的代码结构。但是，它规定了一些需要遵守的规则：</strong></p>
+<ol>
+<li><strong>应用层级的状态应该集中到单个 store 对象中。</strong></li>
+<li><strong>提交 mutation 是更改状态的唯一方法，并且这个过程是同步的。</strong></li>
+<li><strong>异步逻辑都应该封装到 action 里面。</strong></li>
+</ol>
+<p><strong>只要你遵守以上规则，如何组织代码随你便。如果你的 store 文件太大，只需将 action、mutation 和 getter 分割到单独的文件。</strong></p>
+<p><strong>对于大型应用，我们会希望把 Vuex 相关代码分割到模块中。下面是项目结构示例：</strong></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">杨函数</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2021/04/22/Vuex/">http://example.com/2021/04/22/Vuex/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">title</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/06/15/react%E5%85%A5%E9%97%A8/"><img class="prev-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">react入门</div></div></a></div><div class="next-post pull-right"><a href="/2021/04/19/Vue%E8%80%83%E5%AF%9F%E7%82%B9%E6%95%B4%E7%90%86/"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Vue考察点整理</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar2.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">杨函数</div><div class="author-info__description">description</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xjj1573"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/xjj1573" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://www.cnblogs.com/jjSmileEveryDay/" target="_blank" title="CSDN"><i class="fa-book-open"></i></a><a class="social-icon" href="mailto:1055745223@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="tencent://AddContact/?fromId=45&amp;fromSubId=1&amp;subcmd=all&amp;uin=1055745223&amp;website=www.oicqzone.com" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="mailto:1055745223@qq.com" target="_blank" title="Email"><i class="fas fa-envelope-open-text"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/10/25/%E5%B1%B1%E6%B0%B4/" title="山水"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="山水"/></a><div class="content"><a class="title" href="/2022/10/25/%E5%B1%B1%E6%B0%B4/" title="山水">山水</a><time datetime="2022-10-25T06:22:08.000Z" title="发表于 2022-10-25 14:22:08">2022-10-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/10/25/3/" title="3"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="3"/></a><div class="content"><a class="title" href="/2022/10/25/3/" title="3">3</a><time datetime="2022-10-25T05:23:03.000Z" title="发表于 2022-10-25 13:23:03">2022-10-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/09/22/less/" title="less"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="less"/></a><div class="content"><a class="title" href="/2021/09/22/less/" title="less">less</a><time datetime="2021-09-22T14:47:41.000Z" title="发表于 2021-09-22 22:47:41">2021-09-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/08/29/react-%E6%9C%80%E6%96%B0Api/" title="react-最新Api"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="react-最新Api"/></a><div class="content"><a class="title" href="/2021/08/29/react-%E6%9C%80%E6%96%B0Api/" title="react-最新Api">react-最新Api</a><time datetime="2021-08-29T13:42:06.000Z" title="发表于 2021-08-29 21:42:06">2021-08-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/08/26/React%20Router/" title="React Router"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="React Router"/></a><div class="content"><a class="title" href="/2021/08/26/React%20Router/" title="React Router">React Router</a><time datetime="2021-08-26T12:34:02.000Z" title="发表于 2021-08-26 20:34:02">2021-08-26</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 杨函数</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

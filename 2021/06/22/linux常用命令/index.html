@@ -1,0 +1,741 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>linux常用命令 | title</title><meta name="author" content="杨函数"><meta name="copyright" content="杨函数"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="2.1 常⻅⽬录 &#x2F;bin   		  		存放⼆进制可执⾏⽂件(ls,cat,mkdir等**)，常⽤命令⼀般都在这⾥。 &#x2F;etc 					存放系统管理和配置⽂件 &#x2F;home 				存放所有⽤户⽂件的根⽬录，是⽤户主⽬录的基点，⽐如⽤户user的主⽬录就是&#x2F;home&#x2F;user，可以⽤~user表示 &#x2F;usr					⽤于存放系统应⽤">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux常用命令">
+<meta property="og:url" content="http://example.com/2021/06/22/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:site_name" content="title">
+<meta property="og:description" content="2.1 常⻅⽬录 &#x2F;bin   		  		存放⼆进制可执⾏⽂件(ls,cat,mkdir等**)，常⽤命令⼀般都在这⾥。 &#x2F;etc 					存放系统管理和配置⽂件 &#x2F;home 				存放所有⽤户⽂件的根⽬录，是⽤户主⽬录的基点，⽐如⽤户user的主⽬录就是&#x2F;home&#x2F;user，可以⽤~user表示 &#x2F;usr					⽤于存放系统应⽤">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-06-22T08:31:55.000Z">
+<meta property="article:modified_time" content="2022-11-22T09:29:10.428Z">
+<meta property="article:author" content="杨函数">
+<meta name="twitter:card" content="summary"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2021/06/22/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'linux常用命令',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2022-11-22 17:29:10'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar2.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">title</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">linux常用命令</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">发表于</span><time datetime="2021-06-22T08:31:55.000Z" title="发表于 2021-06-22 16:31:55">2021-06-22</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="linux常用命令"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong>2.1</strong> <strong>常⻅⽬录</strong></p>
+<p><strong>&#x2F;bin</strong>   		  		<strong>存放⼆进制可执⾏⽂件</strong><strong>(ls,cat,mkdir</strong>等**)<strong>，常⽤命令⼀般都在这⾥。</strong></p>
+<p>&#x2F;etc 					存放系统管理和配置⽂件</p>
+<p>&#x2F;home 				存放所有⽤户⽂件的根⽬录，是⽤户主⽬录的基点，⽐如⽤户user的主⽬录就是&#x2F;home&#x2F;user，可以⽤~user表示</p>
+<p>&#x2F;usr					⽤于存放系统应⽤程序，⽐较重要的⽬录&#x2F;usr&#x2F;local 本地系统管理员软件安装⽬录（安装系统级的应⽤）。这是最庞⼤的⽬录，要⽤到的应⽤程序和⽂件⼏乎都在这个⽬录。&#x2F;usr&#x2F;x11r6 存放x window的⽬录&#x2F;usr&#x2F;bin 众多的应⽤程序&#x2F;usr&#x2F;sbin超级⽤户的⼀些管理程序&#x2F;usr&#x2F;doc linux⽂档&#x2F;usr&#x2F;include linux下开发和编译应⽤程序所需要的头⽂件&#x2F;usr&#x2F;lib 常⽤的动态链接库和软件包的配置⽂件&#x2F;usr&#x2F;man 帮助⽂档&#x2F;usr&#x2F;src 源代码，linux内核的源代码就放在&#x2F;usr&#x2F;src&#x2F;linux⾥&#x2F;usr&#x2F;local&#x2F;bin本地增加的命令&#x2F;usr&#x2F;local&#x2F;lib 本地增加的库</p>
+<p>&#x2F;opt 				额外安装的可选应⽤程序包所放置的位置。⼀般情况下，我们可以把tomcat等都安装到这⾥。</p>
+<p>&#x2F;proc 			虚拟⽂件系统⽬录，是系统内存的映射。可直接访问这个⽬录来获取系统信息。</p>
+<p>&#x2F;root 			超级⽤户（系统管理员）的主⽬录（特权阶级^o^）</p>
+<p>&#x2F;sbin 			存放⼆进制可执⾏⽂件，只有root才能访问。这⾥存放的是系统管理员使⽤的系统级别的管理命令和程序。如ifconfifig等。</p>
+<p>&#x2F;dev 			⽤于存放设备⽂件。</p>
+<p>&#x2F;mnt 			系统管理员安装临时⽂件系统的安装点，系统提供这个⽬录是让⽤户临时挂载其他的⽂件系统。</p>
+<p>&#x2F;boot 			存放⽤于系统引导时使⽤的各种⽂件</p>
+<p>&#x2F;lib				存放跟⽂件系统中的程序运⾏所需要的共享库及内核模块。共享库⼜叫动态链接共享库，作⽤类似windows⾥的.dll⽂件，存放了根⽂件系统程序运⾏所需的共享⽂件。</p>
+<p>&#x2F;tmp 			⽤于存放各种临时⽂件，是公⽤的临时⽂件存储点。</p>
+<p>&#x2F;var 				⽤于存放运⾏时需要改变数据的⽂件，也是某些⼤⽂件的溢出区，⽐⽅说各种服务的⽇志⽂件（系统启动⽇志等。）等。</p>
+<p>&#x2F;lost+found 	这个⽬录平时是空的，系统⾮正常关机⽽留下“⽆家可归”的⽂件（windows下叫什么.chk）就在这⾥</p>
+<p><strong>2.2</strong> <strong>命令基本格式</strong></p>
+<p><strong>2.2.1</strong> <strong>命令提示符</strong></p>
+<p>[root@xiaohua ~]# </p>
+<ul>
+<li>root 当前登录⽤户</li>
+<li>localhost 主机名</li>
+<li>~ 当前⼯作⽬录,默认是当前⽤户的家⽬录，root就是&#x2F;root,普通⽤户是 &#x2F;home&#x2F;⽤户名</li>
+<li>提示符 超级⽤户是 #,普通⽤户是$</li>
+</ul>
+<p><strong>2.2.2</strong> <strong>命令格式</strong></p>
+<ul>
+<li>命令 [选项] [参数]</li>
+<li>当有多个选项时，可以写在⼀起</li>
+<li>⼀般参数有简化和完整写法两种 -a 与 –all 等效</li>
+</ul>
+<p><strong>2.2.3 ls</strong></p>
+<ul>
+<li>查询⽬录中的内容</li>
+<li>ls [选项] [⽂件或者⽬录]</li>
+<li>选项</li>
+<li><ul>
+<li>-a 显示所有⽂件，包括隐藏⽂件</li>
+<li>-l 显示详细信息</li>
+<li>-d 查看⽬录本身的属性⽽⾮⼦⽂件 ls &#x2F;etc&#x2F;</li>
+<li>-h ⼈性化的⽅式显示⽂件⼤⼩</li>
+<li>-i 显示inode,也就是i节点，每个节点都有ID号</li>
+</ul>
+</li>
+<li>默认当前⽬录下的⽂件列表</li>
+</ul>
+<p><strong>-l</strong>       显示详细信息</p>
+<p><strong>⽂件类型和权限</strong></p>
+<ul>
+<li>⽂件类型 - ⽂件、d ⽬录、l 软链接⽂件</li>
+<li>u(所有者)、g(所属组)、o(其他⼈)</li>
+<li>r(read) 读取、w(write) 写⼊、x(execute) 执⾏</li>
+</ul>
+<p><strong>2.3</strong> <strong>⽂件处理命令</strong></p>
+<p><strong>2.3.1 mkdir</strong></p>
+<ul>
+<li>建⽴⽬录 make directory</li>
+<li>mkdir -p [⽬录名]<ul>
+<li>-p 递归创建</li>
+</ul>
+</li>
+</ul>
+<p><strong>2.3.2 cd</strong></p>
+<ul>
+<li>切换所在⽬录 change directory</li>
+<li>cd [⽬录]<ul>
+<li>~ 家⽬录</li>
+<li>家⽬录</li>
+<li>- 上次⽬录</li>
+<li>. 当前⽬录</li>
+<li>.. 上级⽬录</li>
+</ul>
+</li>
+<li>相对路径是参照当前所在⽬录</li>
+<li>绝对路径是从根⽬录开始</li>
+<li>按TAB键可以补全命令和⽬录</li>
+</ul>
+<p><strong>2.3.3 pwd</strong></p>
+<p>显示当前⽬录 pwd</p>
+<p><strong>2.3.4 rmdir</strong></p>
+<ul>
+<li>删除⽬录 remove empty directory</li>
+<li>rmdir [⽬录名]</li>
+</ul>
+<p><strong>2.3.5 rm</strong></p>
+<ul>
+<li>删除⽂件或者⽬录 remove</li>
+<li>rm [⽂件或者⽬录]<ul>
+<li>-r 删除⽬录</li>
+<li>-f 强制删除</li>
+</ul>
+</li>
+<li>rm -rf ⽂件或者⽬录] 递归强制删除所有⽬录</li>
+</ul>
+<p><strong>删除文件</strong></p>
+<p>语法</p>
+<p>$ rm [option] file…</p>
+<p>参数</p>
+<p>-f：–force 不提示，强制删除文件或目录，但是会忽略不存在的文件 -i：–interactive 进行交互式删除，删除前逐一询问确认 -r, -R：–recursive 递归删除，将指定目录下的所有文件与子目录一并删除 -v： –verbose 详细显示进行的步骤 –help 显示此帮助信息并退出 –version 输出版本信息并退出</p>
+<p>实例</p>
+<ol>
+<li>Linux删除文件</li>
+</ol>
+<p># 删除文件 $ rm file.txt # 强制删除文件 $ rm -f file.txt # 交互式删除文件 $ rm -i file.txt rm: remove regular empty file ‘file.txt’? y # 详细显示进行的步骤 $ rm -v file*.txt removed ‘file1.txt’ removed ‘file2.txt’ removed ‘file3.txt’</p>
+<ol start="2">
+<li>Linux<a target="_blank" rel="noopener" href="https://www.lxlinux.net/4.html">删除文件夹</a></li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://www.lxlinux.net/linux-remove-folder-command.html">Linux系统删除文件夹命令</a>也非常常用，使用rm命令<a target="_blank" rel="noopener" href="https://www.lxlinux.net/4.html">删除文件夹</a>时需要加上 -r 选项，否则会报错。</p>
+<p># 删除目录不加 -r 会报错 $ rm folder rm: cannot remove ‘folder’: Is a directory # 正确删除目录 $ rm -r folder # 强制删除目录 $ rm -rf folder</p>
+<ol start="3">
+<li>删除隐藏文件</li>
+</ol>
+<p>Linux 下隐藏文件是指以符号 . 开头的文件，这种文件使用 ls 命令不能直接查看，需要加上 -a 选项才可以看到。所以如果需要删除该目录下所有隐藏文件的话，可以这样操作：</p>
+<p>$ rm -rf .*</p>
+<p>Linux 下没有回收站，所以文件一旦使用rm命令删除，则无法恢复，所以必须格外小心地使用该命令。</p>
+<p><strong>2.3.6 cp</strong></p>
+<ul>
+<li>copy 复制命令</li>
+<li>copy [源⽂件或者⽬录] [⽬标⽂件]<ul>
+<li>-r 复制⽬录,默认是复制⽂件</li>
+<li>-p 连带⽂件属性复制</li>
+<li>-d 若源⽂件是链接⽂件，则复制连接属性</li>
+<li>-a 相当于 -rpd</li>
+</ul>
+</li>
+</ul>
+<p><strong>2.3.7 mv</strong></p>
+<ul>
+<li>移动⽂件或者改名 move</li>
+<li>mv [源⽂件或者⽬录] [⽬标⽂件]</li>
+</ul>
+<p><strong>2.3.8 ln</strong></p>
+<ul>
+<li>链接命令,⽣成链接⽂件 link</li>
+</ul>
+<p><strong>2.3.8.1</strong> <strong>硬链接特征</strong></p>
+<ul>
+<li><p>拥有相同的i节点和存储block块，可以看作是同⼀个⽂件</p>
+</li>
+<li><p>可以通过i节点访问</p>
+</li>
+<li><p>不能跨分区</p>
+</li>
+<li><p>不能针对⽬录使⽤</p>
+</li>
+<li><p>⼀般不使⽤</p>
+</li>
+</ul>
+<p><strong>2.3.8.2</strong> <strong>软链接特征</strong></p>
+<ul>
+<li>ln -s [源⽂件] [⽬标⽂件]<ul>
+<li>-s 创建软链接</li>
+</ul>
+</li>
+<li>类似Windows快捷⽅式</li>
+<li>软链接拥有⾃⼰的i节点和Block块，但是数据块中只保存源⽂件的⽂件名和i节点号，并没有实际的⽂件数据</li>
+<li>lrwxrwxrwx l 软链接 软链接的⽂件权限都是 777</li>
+<li>修改任意⼀个⽂件，另⼀个都会改变</li>
+<li>删除源⽂件，软链接不能使⽤</li>
+<li>软链接源⽂件必须写绝对路径</li>
+</ul>
+<p><strong>2.4</strong> <strong>⽂件搜索命令</strong></p>
+<p><strong>2.4.1 locate</strong></p>
+<ul>
+<li>在后台数据库中按⽂件名搜索，速度⽐较快</li>
+<li>数据保存在 &#x2F;var&#x2F;lib&#x2F;mlocate 后台数据库，每天更新⼀次</li>
+<li>可以 updatedb 命令⽴刻更新数据库</li>
+<li>只能搜索⽂件名</li>
+</ul>
+<p>建⽴索引的配置⽂件</p>
+<ul>
+<li>PRUNE_BIND_MOUNTS &#x3D; “yes” 全部⽣效，开启搜索限制</li>
+<li>PRUNEFS 不搜索的⽂件系统</li>
+<li>PRUNENAMES 忽略的⽂件类型</li>
+<li>PRUNEPATHS 忽略的路径 &#x2F;tmp</li>
+</ul>
+<p><strong>2.4.2 whereis</strong></p>
+<ul>
+<li><p>搜索命令所在路径以及帮助⽂档所在位置</p>
+</li>
+<li><p>whereis 命令名</p>
+</li>
+<li><p>-b 只查找可执⾏⽂件</p>
+</li>
+<li><p>-m 只查找帮助⽂件</p>
+</li>
+</ul>
+<p><strong>2.4.3 which</strong></p>
+<ul>
+<li>可以看到别名 which ls</li>
+<li>能看到的都是外部安装的命令</li>
+<li>⽆法查看Shell⾃带的命令，如 which cd</li>
+</ul>
+<p><strong>2.4.4</strong> <strong>环境变量</strong></p>
+<ul>
+<li>定义的是系统搜索命令的路径</li>
+</ul>
+<p>echo $PATH</p>
+<p><strong>2.4.5 fifind</strong></p>
+<ul>
+<li>⽂件搜索命令</li>
+<li>fifind [搜索范围] [搜索条件]</li>
+</ul>
+<p><strong>2.4.5.1</strong> <strong>按名称搜索</strong></p>
+<ul>
+<li><p>避免⼤范围的搜索，会⾮常消耗系统资源</p>
+<p>eg:   find &#x2F; -name aaa.log</p>
+</li>
+</ul>
+<p><strong>2.4.5.2</strong> <strong>通配符</strong></p>
+<ul>
+<li>find是在系统当中搜索符合条件的⽂件名，如果需要匹配，使⽤通配符匹配，通配符是完全匹配</li>
+<li>通配符<ul>
+<li>* 匹配任意内容</li>
+<li>? 匹配任意⼀个字符</li>
+<li>[] 匹配任意⼀个中括号内的字符</li>
+</ul>
+</li>
+</ul>
+<p>eg:   find  .  -name “ab[cdef]”</p>
+<p><strong>2.4.5.3 -i</strong></p>
+<ul>
+<li>不区分⼤⼩写    eg: find &#x2F; -iname A.log</li>
+</ul>
+<p><strong>2.4.5.4 -user</strong></p>
+<ul>
+<li>按所有者进⾏搜索</li>
+</ul>
+<p>find &#x2F;root -user root</p>
+<p>find &#x2F;root -nouser</p>
+<p><strong>2.4.5.5</strong> <strong>按时间搜索</strong></p>
+<p>find &#x2F;nginx&#x2F;access.log -mtime +5</p>
+<p><strong>参数</strong> 					<strong>含义</strong></p>
+<p>atime 		⽂件访问时间</p>
+<p>ctime 		改变⽂件属性</p>
+<p>mtime 		修改⽂件内容</p>
+<p><strong>参数</strong> 		<strong>含义</strong></p>
+<p>-5 			5天内修改的⽂件</p>
+<p>5 			5天前当前修改的⽂件</p>
+<p>+5 		5天前修改的⽂件</p>
+<p><strong>2.4.5.6</strong> <strong>按⼤⼩搜索</strong></p>
+<ul>
+<li><p>k⼩写,M⼤写</p>
+<p>find . -size 100k</p>
+<p><strong>参数</strong> 		<strong>含义</strong></p>
+<p>-8k		 ⼩于8K</p>
+<p>8k 		等于8K</p>
+<p>+8k		⼤于8K</p>
+<p>+8M 	⼩于8M</p>
+</li>
+</ul>
+<p><strong>2.4.5.7</strong> <strong>按<strong><strong>i</strong></strong>节点搜索</strong></p>
+<p>find . -inum 123456</p>
+<p><strong>2.4.5.8</strong> <strong>综合应⽤</strong></p>
+<p>find &#x2F;tmp -size +10k -a -size -20k </p>
+<ul>
+<li><p>查找&#x2F;etc⽬录下，⼤于10KB并且⼩于20KB的⽂件</p>
+</li>
+<li><p>1-a and 逻辑与，两个条件都满⾜</p>
+</li>
+<li><p>-o or 逻辑或，两个条件满⾜⼀个就可以</p>
+</li>
+</ul>
+<p><strong>2.4.5.5</strong> <strong>按时间搜索</strong></p>
+<p><strong>2.4.5.6</strong> <strong>按⼤⼩搜索</strong></p>
+<p>k⼩写,M⼤写</p>
+<p><strong>2.4.5.7</strong> <strong>按<strong><strong>i</strong></strong>节点搜索</strong></p>
+<p><strong>2.4.5.8</strong> <strong>综合应⽤</strong></p>
+<ul>
+<li><p>查找&#x2F;etc⽬录下，⼤于10KB并且⼩于20KB的⽂件</p>
+<p>find &#x2F;tmp -size +10k -a -size -20k </p>
+</li>
+<li><p>1-a and 逻辑与，两个条件都满⾜</p>
+</li>
+<li><p>-o or 逻辑或，两个条件满⾜⼀个就可以</p>
+</li>
+<li><p>exec 对上个命令的结果进⾏操作</p>
+</li>
+</ul>
+<p><strong>2.4.5.9 grep</strong></p>
+<ul>
+<li>在⽂件当中匹配符合条件的字符串</li>
+<li>grep “10” access.log<ul>
+<li>-i 忽略⼤⼩写</li>
+<li>-v 排除指定字符串</li>
+</ul>
+</li>
+<li>fifind命令，在系统当中搜索符合条件的⽂件名，如果需要匹配，使⽤通配符匹配，通配符是完全匹配</li>
+<li>grep命令 在⽂件当中搜索符合条件的字符串，如果需要匹配，使⽤正则表达式进⾏匹配，正则表达式时包含匹配</li>
+</ul>
+<p><strong>2.5</strong> <strong>帮助命令</strong></p>
+<p><strong>2.5.1</strong> <strong>基本⽤法</strong></p>
+<ul>
+<li>man 命令 获取指定命令的帮助</li>
+<li>man ls 查看ls的帮助</li>
+</ul>
+<p><strong>2.5.2</strong> <strong>关键字搜索</strong></p>
+<p>- man -k passwd </p>
+<p><strong>2.6</strong> <strong>压缩与解压缩命令</strong></p>
+<p>.zip<code> </code>.gz<code> </code>.bz2<code> </code>.tar.gz<code> </code>.tar.bz2 </p>
+<p><strong>2.6.1 zip</strong>格式</p>
+<ul>
+<li><p>压缩⽂件 zip 压缩⽂件名 源⽂件</p>
+</li>
+<li><p>压缩⽬录 zip -r 压缩⽂件名 源⽬录</p>
+</li>
+<li><p>解压 unzip 压缩⽂件名</p>
+<p>mkdir book</p>
+<p>touch book&#x2F;1.txt</p>
+<p>touch book&#x2F;2.txt</p>
+<p>zip -r book.zip book</p>
+<p>unzip book.zip</p>
+</li>
+</ul>
+<p><strong>2.6.2 gzip</strong></p>
+<p><strong>命令</strong> 						<strong>示例</strong>			 						<strong>含义</strong></p>
+<p>gzip 源⽂件		 gzip a.txt 		压缩为.gz格式的压缩⽂件，源⽂件会消失</p>
+<p>gzip -c 源⽂件 &gt; 压缩⽂件   gzip -c yum.txt &gt;yum.txt.gz  压缩为.gz格式的压缩⽂件，源⽂件不会</p>
+<p>消失</p>
+<p>gzip -r ⽬录 		gzip -r xx 		压缩⽬录下的所有⼦⽂件，但是不压缩⽬录</p>
+<p>gzip -d 压缩⽂件名 	gzip -d yum.txt.gz 		解压缩⽂件,不保留压缩包</p>
+<p>gunzip 压缩⽂件 	gunzip yum.txt.gz 		解压缩⽂件,不保留压缩包</p>
+<ul>
+<li>压缩是压缩⽬录下的⽂件</li>
+</ul>
+<p><strong>2.6.3 .bz2****格式压缩</strong></p>
+<p><strong>命令</strong> 							<strong>示例</strong> 				<strong>含义</strong></p>
+<p>bzip2 源⽂件 		bzip2 1.txt 		压缩为.bz2格式的⽂件，不保留源⽂件</p>
+<p>bzip2 -k 源⽂件 		zip2 -k 1.txt 	压缩为.bz2格式的⽂件，保留源⽂件</p>
+<p>bzip2 -d 压缩⽂件名 	bzip2 -d 1.txt.bz2 	解压压缩包</p>
+<p>bunzip2 压缩⽂件名 	bunzip2 1.txt.bz2 		解压压缩包</p>
+<ul>
+<li>bzip2 不能压缩⽬录</li>
+</ul>
+<p><strong>2.6.4 tar</strong></p>
+<ul>
+<li><p>打包命令</p>
+</li>
+<li><p>tar -cvf 打包⽂件名 源⽂件</p>
+<ul>
+<li>-c 打包</li>
+<li>-v 显示过程</li>
+<li>-f 指定打包后的⽂件名</li>
+</ul>
+</li>
+<li><p>x 解打包</p>
+<p>tar -cvf book.tar book</p>
+<p>gzip book.tar</p>
+<p>bzip2 book.tar</p>
+</li>
+</ul>
+<p><strong>2.6.4</strong> <strong>压缩格式</strong></p>
+<p><strong>压缩</strong></p>
+<ul>
+<li><strong>tar –cvf</strong> jpg.tar *.jpg &#x2F;&#x2F;将⽬录⾥所有jpg⽂件打包成tar.jpg tar –czf jpg.tar.gz *.jpg &#x2F;&#x2F;将⽬录⾥所有jpg⽂件打包成jpg.tar后，并且将其⽤gzip压缩，⽣成⼀个gzip压缩过的包，命名为jpg.tar.gz</li>
+<li><strong>tar –cjf</strong> jpg.tar.bz2 *.jpg &#x2F;&#x2F;将⽬录⾥所有jpg⽂件打包成jpg.tar后，并且将其⽤bzip2压缩，⽣成⼀个bzip2压缩过的包，命名为jpg.tar.bz2 tar –cZf jpg.tar.Z *.jpg &#x2F;&#x2F;将⽬录⾥所有jpg⽂件打包成jpg.tar后，并且将其⽤compress压缩，⽣成⼀个umcompress压缩过的包，命名为jpg.tar.Z rar</li>
+<li>a jpg.rar *.jpg &#x2F;&#x2F;rar格式的压缩，需要先下载rar for linux zip jpg.zip *.jpg &#x2F;&#x2F;zip格式的压缩，需要先下载zip for linux</li>
+</ul>
+<p><strong>解压</strong></p>
+<ul>
+<li><strong>tar –xvf</strong> fifile.tar &#x2F;&#x2F;解压 tar包 tar -xzvf fifile.tar.gz &#x2F;&#x2F;解压tar.gz tar -xjvf fifile.tar.bz2 &#x2F;&#x2F;解压 tar.bz2</li>
+<li><strong>tar –xZvf</strong> fifile.tar.Z &#x2F;&#x2F;解压tar.Z unrar e fifile.rar &#x2F;&#x2F;解压rar unzip fifile.zip &#x2F;&#x2F;解压zip</li>
+</ul>
+<p><strong>2.7</strong> <strong>关机和重启命令</strong></p>
+<p><strong>2.7.1 shutdown</strong></p>
+<ul>
+<li><p>shutdown 关机命令</p>
+<ul>
+<li><p>-c 取消前⼀个关机命令</p>
+</li>
+<li><p>-h 关机</p>
+</li>
+<li><p>-r 重启</p>
+<p>shutdown -r 06:00</p>
+<p>shutdown -c</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>2.7.2 init</strong></p>
+<ul>
+<li>关机   init 0 </li>
+<li>重启   init 6</li>
+<li>系统的运⾏级别<ul>
+<li>0 关机</li>
+<li>1 单⽤户</li>
+<li>2 不完全多⽤户，不包含NFS服务</li>
+<li>3 完全多⽤户</li>
+<li>4 未分配</li>
+<li>5 图形界⾯</li>
+<li>6 重启</li>
+</ul>
+</li>
+</ul>
+<p><strong>2.7.3 logout</strong></p>
+<p>退出登录</p>
+<p><strong>2.9</strong> <strong>查看登录⽤户信息</strong></p>
+<p><strong>2.9.1 w</strong></p>
+<ul>
+<li>查看登录⽤户信息<ul>
+<li>USER 登录的⽤户名</li>
+<li>TTY 登录的终端 tty1 本地终端 pts&#x2F;0远程终端</li>
+<li>FROM 登录的IP</li>
+<li>LOGIN 登录时间</li>
+<li>IDLE ⽤户闲置时间</li>
+<li>JCPU 该终端所有进程占⽤的时间</li>
+<li>PCPU 当前进程所占⽤的时间</li>
+<li>WHAT 正在执⾏的命令</li>
+</ul>
+</li>
+</ul>
+<p><strong>2.9.2 who</strong></p>
+<ul>
+<li>查看登录⽤户信息<ul>
+<li>USER 登录的⽤户名</li>
+<li>TTY 登录的终端 tty1 本地终端 pts&#x2F;0远程终端</li>
+<li>LOGIN 登录时间（登录的IP）</li>
+</ul>
+</li>
+</ul>
+<p><strong>2.9.3 last</strong></p>
+<ul>
+<li>查看当前登录和过去登录的⽤户信息 默认读取 &#x2F;var&#x2F;log&#x2F;wtmp ⽂件<ul>
+<li>⽤户名</li>
+<li>登录终端</li>
+<li>登录IP</li>
+<li>登录时间</li>
+<li>退出时间(在线时间)</li>
+</ul>
+</li>
+</ul>
+<p><strong>2.9.4 lastlog</strong></p>
+<ul>
+<li>查看所有⽤户的最后⼀次登录时间<ul>
+<li>⽤户名</li>
+<li>登录终端</li>
+<li>登录IP</li>
+<li>最后⼀次登录时间</li>
+</ul>
+</li>
+</ul>
+<p><strong>3. shell</strong></p>
+<ul>
+<li>shell是⼀个命令⾏解释器，它为⽤户提供了⼀个向Linux内核发送请求以便运⾏程序的界⾯系统级程序</li>
+<li>⽤户可以⽤Shell来启动、挂起、停⽌或者编写⼀些程序</li>
+<li>Shell还是⼀个功能相当强⼤的编程语⾔，易编写，易调试，灵活性较强。</li>
+<li>Shell是解释执⾏的脚本语⾔，在Shell中可以直接调⽤Linux系统命令。</li>
+</ul>
+<p><strong>3.1</strong> <strong>查看⽀持的</strong> <strong>shell</strong></p>
+<p>&#x2F;etc&#x2F;shells</p>
+<p><strong>3.2 echo</strong></p>
+<ul>
+<li>输出命令</li>
+<li>–e ⽀持反斜线控制的字符转换</li>
+</ul>
+<p><strong>3.3</strong> <strong>编写执⾏****shell</strong></p>
+<ul>
+<li>赋予执⾏权限，直接运⾏</li>
+</ul>
+<p>chmod 755 hello.sh</p>
+<p>.&#x2F;hello.sh</p>
+<ul>
+<li>通过Bash调⽤执⾏脚本    bash hello.sh</li>
+</ul>
+<p><strong>3.4</strong> <strong>别名</strong></p>
+<ul>
+<li><p>命令别名 &#x3D;&#x3D; ⼩名</p>
+</li>
+<li><p>临时⽣效</p>
+</li>
+<li><p>alias</p>
+</li>
+<li><p>alias rm&#x3D;”rm -i”</p>
+</li>
+<li><p>写⼊环境变量配置⽂件 vi ~&#x2F;.bashrc</p>
+</li>
+<li><p>source ~&#x2F;.bashrc</p>
+</li>
+<li><p>unalias 别名 删除别名</p>
+</li>
+</ul>
+<p><strong>3.5</strong> <strong>命令的⽣效顺序</strong></p>
+<ul>
+<li>绝对路径或者相对路径</li>
+<li>别名</li>
+<li>bash内部命令</li>
+<li>按照$PATH环境变量定义的⽬录查找顺序找到的第⼀个命令</li>
+</ul>
+<p><strong>3.6</strong> <strong>命令快捷键</strong></p>
+<p><strong>命令</strong> 		<strong>含义</strong></p>
+<p>ctrl+c 	强制终⽌当前命令</p>
+<p>ctrl+l 	清屏</p>
+<p>ctrl+a 	光标移动到命令⾏⾸</p>
+<p>ctrl+e 	光标移动到命令⾏尾</p>
+<p>ctrl+u 	从光标所在的位置删除到⾏⾸</p>
+<p>ctrl+z 	把命令放⼊后台</p>
+<p>ctrl+r 	在历史命令中搜索</p>
+<p><strong>3.7</strong> <strong>历史命令</strong></p>
+<ul>
+<li>history [选项] [历史命令保存⽂件]</li>
+<li>选项<ul>
+<li>-c 清空历史命令</li>
+<li>1-w 把缓存中的历史命令写⼊历史命令保存⽂件 ~&#x2F;.bash_history</li>
+</ul>
+</li>
+<li>默认保存1000条 &#x2F;etc&#x2F;profifile HISSIZE&#x3D;10000</li>
+</ul>
+<p><strong>3.8</strong> <strong>调⽤</strong></p>
+<ul>
+<li>使⽤上下箭头调⽤以前的历史命令</li>
+<li>使⽤ !n 重复执⾏第n条历史命令</li>
+<li>使⽤ !! 重复执⾏上⼀条命令</li>
+<li>使⽤ !字符 重复执⾏最后⼀条以该字符串开头的命令</li>
+</ul>
+<p><strong>3.9.3</strong> <strong>通配符</strong></p>
+<ul>
+<li>匹配⽂件名和⽬录名 |通配符|作⽤| |:—-|:—-| |?|匹配⼀个任意字符| |*|匹配0个或任意字符，也就是可以匹配任意内容| |[]|匹配中括号中任意⼀个字符| |[-]|匹配中括号中任意⼀个字符,-代表范围| |[^]|匹配不是中括号中的⼀个字符|</li>
+</ul>
+<p><strong>3.9.4</strong> <strong>其它符号</strong></p>
+<p>‘’ 		单引号。在单引号中所有的特殊符号，如$和&#96;都没有特殊含义</p>
+<p>“” 		双引号，在双引号⾥特殊符号都没有特殊含义，但是 $ &#96; \ 例外，拥有调⽤变量值，引⽤命令和转义的含义</p>
+<p>&#96;&#96; 		反引号，扩起来的是系统命令</p>
+<p>$() 		和反引号⼀样</p>
+<p># 		在shell脚本中，#开头的⾏代表注释</p>
+<p>$ 		⽤于调⽤变量的值</p>
+<p>\ 		转义符号</p>
+<p><strong>4. vi****编辑器</strong></p>
+<ul>
+<li>VI visual interface</li>
+<li>可视化接⼝</li>
+<li>类似与windows中的记事本</li>
+<li>vim⽀持多级撤销</li>
+<li>跨平台</li>
+<li>语法⾼亮</li>
+<li>⽀持图形界⾯</li>
+</ul>
+<p><strong>4.1</strong> <strong>操作模式</strong></p>
+<ul>
+<li>:w 保存</li>
+<li>:q 退出</li>
+<li>:! 强制保存</li>
+<li>:ls 列出所有的⽂件</li>
+<li>:n 下⼀个</li>
+<li>:N 上⼀个</li>
+<li>:15 跳转到指定⾏</li>
+<li>&#x2F;xxx 从光标位置开始向后搜索 xxx 字符串</li>
+<li>?xxx 从光标位置开始向前搜索</li>
+</ul>
+<p><strong>5.</strong> <strong>⽤户和⽤户组</strong></p>
+<ul>
+<li>使⽤操作系统的⼈都是⽤户</li>
+<li>⽤户组是具有相同系统权限的⼀组⽤户</li>
+</ul>
+<p>2<strong>5.1</strong> <strong>⽤户组</strong></p>
+<p><strong>5.1.1 &#x2F;etc&#x2F;group</strong></p>
+<p>&#x2F;etc&#x2F;group </p>
+<ul>
+<li>存储当前系统中所有⽤户组信息</li>
+<li>group:x:123:abc,def</li>
+<li>组名称:组密码占位符:组编号:组中⽤户名列表</li>
+<li>root 组编号为0</li>
+<li>1-499系统预留的编号 预留给安装的软件和服务的</li>
+<li>⽤户⼿动创建的⽤户组从500开始</li>
+<li>组密码占位符都是x</li>
+</ul>
+<p><strong>5.1.2 &#x2F;etc&#x2F;gshadow</strong></p>
+<ul>
+<li>存放当前系统中⽤户组的密码信息</li>
+<li>和group中的记录⼀⼀对应</li>
+<li>Group: * : :abc</li>
+<li>组名称 组密码 组管理者 组中⽤户名</li>
+</ul>
+<p><strong>5.1.3 &#x2F;etc&#x2F;passwd</strong></p>
+<ul>
+<li>存储当前系统中所有⽤户的信息</li>
+<li>user:x:123:456:xxxxx:&#x2F;home&#x2F;user:&#x2F;bin&#x2F;bash</li>
+<li>⽤户名:密码占位符:⽤户编号: ⽤户注释信息:⽤户主⽬录:shell类型</li>
+</ul>
+<p><strong>5.1.4 &#x2F;etc&#x2F;shadow</strong></p>
+<ul>
+<li>存放当前系统中所有⽤户的密码信息</li>
+<li>user:xxx:::::::</li>
+<li>⽤户名:密码:</li>
+</ul>
+<p><strong>6.</strong> <strong>⽤户操作</strong></p>
+<p>添加组		groupadd student </p>
+<p>修改组名称		groupmod -n stu student </p>
+<p>修改组编号		groupmod -g 111 stu </p>
+<p>添加分组并指定编号		groupadd -g 222 teacher</p>
+<p>删除分组		groupdel 222</p>
+<p>添加分组		groupadd teacher </p>
+<p>为⽤户指定所属组		useradd -g teacher zhangsan	</p>
+<p>为⽤户指定⼯作⽬录		useradd -d &#x2F;home&#x2F;zhangsan zhangsan</p>
+<p>指定注释		usermod -c iamateacher zhangsan</p>
+<p>修改⽤户名		usermod -l zhangsan zhangsan2</p>
+<p>修改指定⽂件夹		usermod -d &#x2F;home&#x2F;zhangsan2 zhangsan2</p>
+<p>修改⽤户所属组		usermod -g stu zhangsan2 	 	</p>
+<p>删除⽤户			userdel zhangsan2</p>
+<p>删除所属⽂件夹		userdel -r lisi</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">杨函数</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2021/06/22/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">http://example.com/2021/06/22/linux常用命令/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">title</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/07/15/Redux/"><img class="prev-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Redux</div></div></a></div><div class="next-post pull-right"><a href="/2021/06/21/ReactHook/"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">ReactHook</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar2.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">杨函数</div><div class="author-info__description">description</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xjj1573"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/xjj1573" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://www.cnblogs.com/jjSmileEveryDay/" target="_blank" title="CSDN"><i class="fa-book-open"></i></a><a class="social-icon" href="mailto:1055745223@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="tencent://AddContact/?fromId=45&amp;fromSubId=1&amp;subcmd=all&amp;uin=1055745223&amp;website=www.oicqzone.com" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="mailto:1055745223@qq.com" target="_blank" title="Email"><i class="fas fa-envelope-open-text"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/10/25/%E5%B1%B1%E6%B0%B4/" title="山水"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="山水"/></a><div class="content"><a class="title" href="/2022/10/25/%E5%B1%B1%E6%B0%B4/" title="山水">山水</a><time datetime="2022-10-25T06:22:08.000Z" title="发表于 2022-10-25 14:22:08">2022-10-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/10/25/3/" title="3"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="3"/></a><div class="content"><a class="title" href="/2022/10/25/3/" title="3">3</a><time datetime="2022-10-25T05:23:03.000Z" title="发表于 2022-10-25 13:23:03">2022-10-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/09/22/less/" title="less"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="less"/></a><div class="content"><a class="title" href="/2021/09/22/less/" title="less">less</a><time datetime="2021-09-22T14:47:41.000Z" title="发表于 2021-09-22 22:47:41">2021-09-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/08/29/react-%E6%9C%80%E6%96%B0Api/" title="react-最新Api"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="react-最新Api"/></a><div class="content"><a class="title" href="/2021/08/29/react-%E6%9C%80%E6%96%B0Api/" title="react-最新Api">react-最新Api</a><time datetime="2021-08-29T13:42:06.000Z" title="发表于 2021-08-29 21:42:06">2021-08-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/08/26/React%20Router/" title="React Router"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="React Router"/></a><div class="content"><a class="title" href="/2021/08/26/React%20Router/" title="React Router">React Router</a><time datetime="2021-08-26T12:34:02.000Z" title="发表于 2021-08-26 20:34:02">2021-08-26</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 杨函数</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

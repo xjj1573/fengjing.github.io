@@ -1,0 +1,225 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Redux | title</title><meta name="author" content="杨函数"><meta name="copyright" content="杨函数"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Redux快速入门 什么是Redux? props 一级一级 state 组件内部状态管理  react-&gt;单向数据流 数据状态非常复杂-&gt;很难让两个组件进行通信-&gt;解决:把所有的state集中的组件的顶部-&gt;redux。集中管理组件的状态，数据仓库 redux:js状态容器，提供可预测化的状态管理 react和redux是没有任何关系。redux就是一个独立的状态管理的库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redux">
+<meta property="og:url" content="http://example.com/2021/07/15/Redux/index.html">
+<meta property="og:site_name" content="title">
+<meta property="og:description" content="Redux快速入门 什么是Redux? props 一级一级 state 组件内部状态管理  react-&gt;单向数据流 数据状态非常复杂-&gt;很难让两个组件进行通信-&gt;解决:把所有的state集中的组件的顶部-&gt;redux。集中管理组件的状态，数据仓库 redux:js状态容器，提供可预测化的状态管理 react和redux是没有任何关系。redux就是一个独立的状态管理的库">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-07-15T11:37:49.000Z">
+<meta property="article:modified_time" content="2022-11-22T10:52:16.418Z">
+<meta property="article:author" content="杨函数">
+<meta name="twitter:card" content="summary"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2021/07/15/Redux/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Redux',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2022-11-22 18:52:16'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar2.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">title</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Redux</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">发表于</span><time datetime="2021-07-15T11:37:49.000Z" title="发表于 2021-07-15 19:37:49">2021-07-15</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Redux"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>Redux快速入门</p>
+<p><strong>什么是Redux?</strong></p>
+<p>props 一级一级</p>
+<p>state 组件内部状态管理 </p>
+<p>react-&gt;单向数据流</p>
+<p>数据状态非常复杂-&gt;很难让两个组件进行通信-&gt;解决:把所有的state集中的组件的顶部-&gt;redux。集中管理组件的状态，数据仓库</p>
+<p>redux:js状态容器，提供可预测化的状态管理</p>
+<p>react和redux是没有任何关系。redux就是一个独立的状态管理的库。(mobx状态管理库)</p>
+<p>store-&gt;state tree-&gt;改变state的唯一方法storedispatch触发一个action-&gt;reducer完成state更新。组件可以派发dispatch action行为派发给store,其它组件可以订阅store中的状态state来刷新自己的视图</p>
+<p><strong>要点</strong>:应用中所有的state都一个对象树的形式存储在一个单一的store中，唯一改变state的方式是派发action，</p>
+<p><strong>action</strong>:一个描述发生了什么的对象，动作，行为 reducer:为了描述action如何改变state树</p>
+<p><strong>Redux的好处</strong></p>
+<p>props，单向数据流，一级一级</p>
+<p><strong>Redux解决的问题</strong></p>
+<p>多级传递数据的痛苦</p>
+<p>相邻组件的数据传递-&gt;parent顶层组件，connect函数react和redux的连接 </p>
+<p>redux可以将数据连接到任何组件</p>
+<p>connect函数</p>
+<p><strong>Redux的使用场景</strong></p>
+<p>公共组件，业务组件非常多，用户使用方式比较复杂，项目庞大</p>
+<p>不同用户角色权限管理</p>
+<p>需要与服务器大量的交互，聊天，直播等应用</p>
+<p>view需要从多个来源获取数据</p>
+<p>react解决不了的，多交互，多数据源，使用redux</p>
+<p>注意：不要盲目引入redux，只会增加复杂度</p>
+<p><strong>Redux是如何工作的</strong></p>
+<p><strong>三大核心</strong></p>
+<p><strong>action：</strong>描述发生了什么的一个对象，动作，指令，type  {type:’add’ },单独的模块，文件来存放action（项目规模变大后），dispatch(派发，分发)</p>
+<p>**reducer:**数据控制器，数据的修改者，action.type,具体做什么，返回一个newState</p>
+<p>指定了应用状态（state）变化如何响应action并发送到store</p>
+<p><strong>注意：</strong> 保持reducer纯净 ，纯函数，固定的输入一定有固定的输出。</p>
+<p>只要传入的参数相同，返回计算得到的下一个state一定相同</p>
+<p>副作用：ajax请求等</p>
+<p>**store:**数据仓库，</p>
+<p>getState()           获取state</p>
+<p>dispatch(action) 更新state</p>
+<p>redux只有一个单一的store</p>
+<p>进行拆分数据处理逻辑–&gt;不应该拆分reducer，-&gt;combineReducers</p>
+<p><strong>使用的一般过程</strong></p>
+<p>创建reducer</p>
+<p>创建action</p>
+<p>创建store</p>
+<p><img src="clipboard.png" alt="img"></p>
+<p><strong>Redux的三大原则</strong></p>
+<p><strong>1.单一数据源</strong></p>
+<p><strong>store可以理解为全局变量对象</strong></p>
+<p><strong>2.state是只读的</strong></p>
+<p><strong>唯一改变方法是触发action，可以确保视图和api请求都不能直接修改state，只能表达想要修改的意图，只能通过action，在reducer中进行集中化的处理</strong></p>
+<p><strong>3.reducer中使用纯函数执行修改。</strong></p>
+<p><strong>为了描述action如何改变state，</strong></p>
+<p><strong>实际应用</strong></p>
+<p><strong>副作用操作：</strong></p>
+<p><strong>Redux-thunk,进行不纯的操作</strong>  </p>
+<p><strong>thunk action</strong></p>
+<p><strong>npm i redux-thunk</strong></p>
+<p>安装：npm i redux ，npm i  react-redux</p>
+<p> react-redux是react内置的，不是redux的，主要起到一个连接的作用</p>
+<p>reducer: if(action.type&#x3D;&#x3D;’ADD’){ }else if { }</p>
+<p>switch 应用场景比较简单</p>
+<p>场景复杂，创建一个对象通过action的type来查找对应的处理函数</p>
+<p>【17.35】</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import React from &#x27;react&#x27;;</span><br><span class="line">import &#123;connect&#125; from &quot;react-redux&quot;;</span><br><span class="line">import &#123; add,reduce &#125; from &quot;../store/actions&quot;;</span><br><span class="line"></span><br><span class="line">//函数 ,用于建立组件和store的state的映射关系，可以改名字，一般叫这个</span><br><span class="line">function mapStateToProps(state)&#123;</span><br><span class="line">    return&#123;</span><br><span class="line">        count:state.count</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line">class ReduxCounter extends React.Component &#123;</span><br><span class="line">    handleAdd=()=&gt;&#123;</span><br><span class="line">        this.props.dispatch(add());//this.props.dispatch(&#123;type:ADD&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    handleReduce=()=&gt;&#123;</span><br><span class="line">        this.props.dispatch(reduce());//this.props.dispatch(&#123;type:REDUCE&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    render()&#123;</span><br><span class="line">        return (</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">                 &lt;h3&gt;我是ReduxCounter组件&lt;/h3&gt;</span><br><span class="line">                &lt;div&gt;</span><br><span class="line">                    &lt;button onClick=&#123;this.handleAdd&#125;&gt;加1&lt;/button&gt;</span><br><span class="line">                    &lt;span&gt;&#123;this.props.count&#125;&lt;/span&gt;</span><br><span class="line">                    &lt;button onClick=&#123;this.handleReduce&#125;&gt;减1&lt;/button&gt;</span><br><span class="line">                &lt;/div&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//传入mapStateToProps这个参数后，组件便会订阅store中状态的变化</span><br><span class="line">//connect是一个高阶函数，传入mapStateToProps后返回一个函数，高阶组件</span><br><span class="line">//state和dispatch都映射了</span><br><span class="line">export default connect(mapStateToProps)(ReduxCounter);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import React from &quot;react&quot;;</span><br><span class="line">import  store  from &quot;../store/index&quot;;</span><br><span class="line">import &#123; Provider&#125; from &quot;react-redux&quot;;</span><br><span class="line">import ReduxCounter from &quot;./ReduxCounter&quot;;</span><br><span class="line">//connect函数  provider组件</span><br><span class="line">class ReduxComponent extends React.Component &#123;</span><br><span class="line">    constructor(props)&#123;</span><br><span class="line">        super(props);</span><br><span class="line">        this.state = &#123;</span><br><span class="line">            count:0</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    handldAdd=()=&gt;&#123;</span><br><span class="line">        this.setState(&#123;count:this.state.count+1&#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    handldRedux=()=&gt;&#123;</span><br><span class="line">        this.setState(&#123;count:this.state.count-1&#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    render()&#123;</span><br><span class="line">        return (</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">                &lt;h3&gt;我是counter组件&lt;/h3&gt;</span><br><span class="line">                &lt;div&gt;</span><br><span class="line">                    &lt;button onClick=&#123;this.handldAdd&#125;&gt;加1&lt;/button&gt;</span><br><span class="line">                    &lt;span&gt;&#123;this.state.count&#125;&lt;/span&gt;</span><br><span class="line">                    &lt;button onClick=&#123;this.handldRedux&#125;&gt;减1&lt;/button&gt;</span><br><span class="line">                    &#123;/* 要通过Provider包裹，不然state不会被传到子组件中来 */&#125;</span><br><span class="line">                    &lt;Provider store=&#123;store&#125;&gt;</span><br><span class="line">                       &lt;ReduxCounter /&gt; </span><br><span class="line">                    &lt;/Provider&gt;</span><br><span class="line">                &lt;/div&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default ReduxComponent;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import &#123; createStore &#125; from &quot;redux&quot;;</span><br><span class="line"></span><br><span class="line">const initialState =&#123;</span><br><span class="line">    count:0</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">//store需要一个reducer</span><br><span class="line">//(state,action)=new State</span><br><span class="line">//唯一要点：当state变化时要返回全新的对象，而不是修改传入的参数</span><br><span class="line">//必须是纯的，遵守redux原则</span><br><span class="line">function reducer (state=initialState,action)&#123;</span><br><span class="line">    console.log(&#x27;reducer&#x27;,state,action)</span><br><span class="line">    switch (action.type)&#123;</span><br><span class="line">        case &quot;ADD&quot;:</span><br><span class="line">            return &#123;//不能直接修改state参数，satate.count++;只能通过return的方式返回新的state</span><br><span class="line">                count:state.count+1</span><br><span class="line">            &#125;;</span><br><span class="line">        case &quot;REDUCE&quot;:</span><br><span class="line">            return &#123;</span><br><span class="line">                count:state.count-1</span><br><span class="line">            &#125;;</span><br><span class="line">        default:</span><br><span class="line">            return state;</span><br><span class="line">    &#125;    </span><br><span class="line">    return state;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const store = createStore(reducer);</span><br><span class="line">/* store.dispatch(&#123;type:&#x27;ADD&#x27;&#125;);</span><br><span class="line">store.dispatch(&#123;type:&#x27;REDUCE&#x27;&#125;);</span><br><span class="line">store.dispatch(&#123;type:&#x27;REDUCE&#x27;&#125;); */</span><br><span class="line">//创建store存放应用状态</span><br><span class="line">export default store;</span><br></pre></td></tr></table></figure>
+
+<p><strong>action处理方式</strong>：</p>
+<p>放在一个单独的action.js中，推荐</p>
+<p>大写的一般认为是常量：约定俗成的一种规范，比如ADD,REDUCE</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//actions.js export const ADD=&#x27;ADD&#x27;;</span><br><span class="line">export const REDUCE=&#x27;REDUCE&#x27;; </span><br><span class="line">export const add=()=&gt;(&#123;type:ADD&#125;);</span><br><span class="line">export const reduce=()=&gt;(&#123;type:REDUCE&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>使用的时候直接：this.props.<strong>dispatch</strong>(<strong>add</strong>()); this.props.<strong>dispatch</strong>(<strong>reduce</strong>());</p>
+<p>如何把dispatch也应射进去？</p>
+<p>const mapDispatchToProps&#x3D;{</p>
+<p> add,</p>
+<p> reduce </p>
+<p>}</p>
+<p>export default connect(mapStateToProps,mapDispatchToProps)(ReduxCounter);</p>
+<p> this.props.add();&#x2F;&#x2F;this.props.dispatch(add()) </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import React from &#x27;react&#x27;;</span><br><span class="line">import &#123;connect&#125; from &quot;react-redux&quot;;</span><br><span class="line">import &#123; add,reduce &#125; from &quot;../store/actions&quot;;</span><br><span class="line"></span><br><span class="line">//函数 ,用于建立组件和store的state的映射关系，可以改名字，一般叫这个</span><br><span class="line">function mapStateToProps(state)&#123;</span><br><span class="line">    return&#123;</span><br><span class="line">        count:state.count</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const mapDispatchToProps=&#123;</span><br><span class="line">  add,</span><br><span class="line">  reduce </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class ReduxCounter extends React.Component &#123;</span><br><span class="line">    handleAdd=()=&gt;&#123;</span><br><span class="line">        this.props.add();//this.props.dispatch(add()) //this.props.dispatch(&#123;type:ADD&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    handleReduce=()=&gt;&#123;</span><br><span class="line">        this.props.reduce();//this.props.dispatch(reduce())//this.props.dispatch(&#123;type:REDUCE&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    render()&#123;</span><br><span class="line">        return (</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">                 &lt;h3&gt;我是ReduxCounter组件&lt;/h3&gt;</span><br><span class="line">                &lt;div&gt;</span><br><span class="line">                    &lt;button onClick=&#123;this.handleAdd&#125;&gt;加1&lt;/button&gt;</span><br><span class="line">                    &lt;span&gt;&#123;this.props.count&#125;&lt;/span&gt;</span><br><span class="line">                    &lt;button onClick=&#123;this.handleReduce&#125;&gt;减1&lt;/button&gt;</span><br><span class="line">                &lt;/div&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//传入mapStateToProps这个参数后，组件便会订阅store中状态的变化</span><br><span class="line">//connect是一个高阶函数，传入mapStateToProps后返回一个函数，高阶组件</span><br><span class="line">//state和dispatch都映射了</span><br><span class="line">//mapDispatchToProps作为第二个参数传入</span><br><span class="line">export default connect(mapStateToProps,mapDispatchToProps)(ReduxCounter);</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://github.com/xjj1573/myreact-demo">https://github.com/xjj1573/myreact-demo</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">杨函数</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2021/07/15/Redux/">http://example.com/2021/07/15/Redux/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">title</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/08/26/React%20Router/"><img class="prev-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">React Router</div></div></a></div><div class="next-post pull-right"><a href="/2021/06/22/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">linux常用命令</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar2.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">杨函数</div><div class="author-info__description">description</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xjj1573"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/xjj1573" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://www.cnblogs.com/jjSmileEveryDay/" target="_blank" title="CSDN"><i class="fa-book-open"></i></a><a class="social-icon" href="mailto:1055745223@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="tencent://AddContact/?fromId=45&amp;fromSubId=1&amp;subcmd=all&amp;uin=1055745223&amp;website=www.oicqzone.com" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="mailto:1055745223@qq.com" target="_blank" title="Email"><i class="fas fa-envelope-open-text"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/10/25/%E5%B1%B1%E6%B0%B4/" title="山水"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="山水"/></a><div class="content"><a class="title" href="/2022/10/25/%E5%B1%B1%E6%B0%B4/" title="山水">山水</a><time datetime="2022-10-25T06:22:08.000Z" title="发表于 2022-10-25 14:22:08">2022-10-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/10/25/3/" title="3"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="3"/></a><div class="content"><a class="title" href="/2022/10/25/3/" title="3">3</a><time datetime="2022-10-25T05:23:03.000Z" title="发表于 2022-10-25 13:23:03">2022-10-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/09/22/less/" title="less"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="less"/></a><div class="content"><a class="title" href="/2021/09/22/less/" title="less">less</a><time datetime="2021-09-22T14:47:41.000Z" title="发表于 2021-09-22 22:47:41">2021-09-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/08/29/react-%E6%9C%80%E6%96%B0Api/" title="react-最新Api"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="react-最新Api"/></a><div class="content"><a class="title" href="/2021/08/29/react-%E6%9C%80%E6%96%B0Api/" title="react-最新Api">react-最新Api</a><time datetime="2021-08-29T13:42:06.000Z" title="发表于 2021-08-29 21:42:06">2021-08-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/08/26/React%20Router/" title="React Router"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="React Router"/></a><div class="content"><a class="title" href="/2021/08/26/React%20Router/" title="React Router">React Router</a><time datetime="2021-08-26T12:34:02.000Z" title="发表于 2021-08-26 20:34:02">2021-08-26</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 杨函数</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

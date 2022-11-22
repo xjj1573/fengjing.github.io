@@ -1,0 +1,286 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>VueRouter | title</title><meta name="author" content="杨函数"><meta name="copyright" content="杨函数"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Detail：详情请查阅QD &#x2F; Vue &#x2F; 08 SPA单页面应用 一、什么是VueRouter 1、定义    是Vue官方的路由管理器，适用于单页面应用的路由管理，本质就是建立了Url和组件之间的映射关系 2、作用 设定访问路径 3、传统的路径跳转 通过超链接的方式进行跳转 4、名词 （1）route 单个路由 （2）routes 路由集合，通常为一个数组 （3）rout">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VueRouter">
+<meta property="og:url" content="http://example.com/2021/03/22/VueRouter/index.html">
+<meta property="og:site_name" content="title">
+<meta property="og:description" content="Detail：详情请查阅QD &#x2F; Vue &#x2F; 08 SPA单页面应用 一、什么是VueRouter 1、定义    是Vue官方的路由管理器，适用于单页面应用的路由管理，本质就是建立了Url和组件之间的映射关系 2、作用 设定访问路径 3、传统的路径跳转 通过超链接的方式进行跳转 4、名词 （1）route 单个路由 （2）routes 路由集合，通常为一个数组 （3）rout">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-03-22T10:05:59.000Z">
+<meta property="article:modified_time" content="2022-11-22T10:53:03.364Z">
+<meta property="article:author" content="杨函数">
+<meta name="twitter:card" content="summary"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2021/03/22/VueRouter/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'VueRouter',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2022-11-22 18:53:03'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar2.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">title</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">VueRouter</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">发表于</span><time datetime="2021-03-22T10:05:59.000Z" title="发表于 2021-03-22 18:05:59">2021-03-22</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="VueRouter"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong>Detail：详情请查阅QD &#x2F; Vue &#x2F; 08 SPA单页面应用</strong></p>
+<p><strong>一、什么是VueRouter</strong></p>
+<p><strong>1、定义</strong>   </p>
+<p><strong>是Vue官方的路由管理器，适用于单页面应用的路由管理，本质就是建立了Url和组件之间的映射关系</strong></p>
+<p><strong>2、作用</strong></p>
+<p><strong>设定访问路径</strong></p>
+<p><strong>3、传统的路径跳转</strong></p>
+<p><strong>通过超链接的方式进行跳转</strong></p>
+<p><strong>4、名词</strong></p>
+<p><strong>（1）route</strong></p>
+<p><strong>单个路由</strong></p>
+<p><strong>（2）routes</strong></p>
+<p><strong>路由集合，通常为一个数组</strong></p>
+<p><strong>（3）router</strong></p>
+<p><strong>路由器，负责管理route和routes，负责查找对应的单个路由</strong></p>
+<p><strong>关系：当用户点击一个跳转按钮时，router会在routes中查找对应的route，将页面切换显示为相关的组件内容</strong></p>
+<p><strong>5、vue-router的实现原理</strong></p>
+<p><strong>（1）SPA</strong></p>
+<p><strong>单页面应用，页面交互&#x2F;切换路由时，不会刷新页面，只是不同的组件内容在同一个页面中不断切换，只更新视图，不会重新请求页面(无刷新) —— 其中最重要的原因就是前端路由</strong></p>
+<p><strong>1）前端路由</strong></p>
+<p><strong>前端路由：通过匹配不同的url路径进行解析，动态渲染html内容</strong></p>
+<p><strong>缺点：渲染是会引起页面刷新</strong></p>
+<p><strong>解决方案：</strong></p>
+<p><strong>vue-router实现了请求路由时不会刷新页面</strong></p>
+<p><strong>Vue-router一共包含两种模式：</strong></p>
+<p><strong>可以通过mode参数来指定使用哪种模式</strong></p>
+<p>mode: hash &#x2F; history</p>
+<ul>
+<li><strong>hash模式</strong> <strong>—— 默认模式，可以模拟一个完整的url，通过onhashchange获取hash的方式进行切换 ——</strong> <strong>类似锚点，监听事件：</strong>onhashchange</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 模拟hash</span><br><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;a href=&quot;#a&quot;&gt;跳转到a内容部分&lt;/a&gt;</span><br><span class="line">  &lt;a href=&quot;#b&quot;&gt;跳转到b内容部分&lt;/a&gt;</span><br><span class="line">  &lt;script&gt;</span><br><span class="line">    if(&#x27;onhashchange&#x27; in window) &#123;</span><br><span class="line">      window.onhashchange = () =&gt; &#123;</span><br><span class="line">        console.log(this.location.hash);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li><strong>history模式</strong></li>
+</ul>
+<p><strong>由于在Html5发布以后，新增了</strong> <strong>pushState</strong> <strong>和</strong> <strong>replaceState</strong> <strong>两个API，可以动态更新url，并且不会重新发送请求，因此不会引起页面的重新渲染</strong></p>
+<p><strong>原理：****是浏览器的记录栈，back、forward、go都提供了对历史记录数据的修改功能</strong></p>
+<p><strong>（2）MPA</strong></p>
+<p><strong>多页面应用，对应多个html文件，通常通过a连接来联通各个页面，开发比较冗余，页面压缩打包加载比较缓慢，页面之间跳转也比较缓慢，并且还会出现白屏</strong></p>
+<p><strong>6、vue-router的使用</strong></p>
+<p><strong>（1）安装</strong></p>
+<p><strong>① script</strong></p>
+<p>​    &#x2F;&#x2F; 引入文件   </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;script src=&quot;router.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>② npm</strong></p>
+<p>​    &#x2F;&#x2F; npm安装引入    npm install vue-router –save</p>
+<p><strong>（2）使用</strong></p>
+<p>&#x2F;&#x2F; router&#x2F;index.js   </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// router/index.js</span><br><span class="line">    // 引入第三方依赖</span><br><span class="line">    import VueRouter from &#x27;vue-router;</span><br><span class="line">    // 路由注册</span><br><span class="line">    Vue.use(VueRouter)</span><br><span class="line">    </span><br><span class="line">    const routes = [&#123;</span><br><span class="line">        path: &quot;/&quot;,</span><br><span class="line">        name: &quot;home&quot;,</span><br><span class="line">       component: Home</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        path: &quot;/about&quot;,</span><br><span class="line">        name: &quot;about&quot;,</span><br><span class="line">       component: () =&gt; import(/* webpackChunkName: &#x27;about&#x27; */ &quot;../views/About.vue&quot;)</span><br><span class="line">    &#125;,&#123;</span><br><span class="line">        path: &quot;/shopDetail&quot;,</span><br><span class="line">        name: &quot;shopDetail/:id&quot;,</span><br><span class="line">       component: () =&gt; import(/* webpackChunkName: &#x27;shopDetail&#x27; */ &quot;../views/shopDetail.vue&quot;)</span><br><span class="line">    &#125;,&#123;</span><br><span class="line">        // 容错路由，必须放置在最末尾</span><br><span class="line">        path: &quot;**&quot;,</span><br><span class="line">        name: &quot;404&quot;,</span><br><span class="line">        component: Error</span><br><span class="line">    &#125;];</span><br><span class="line">    </span><br><span class="line">    // 创建router路有实例</span><br><span class="line">    const router = new VueRouter(&#123;</span><br><span class="line">        mode: &quot;history&quot;,</span><br><span class="line">        routes</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    export default router;</span><br></pre></td></tr></table></figure>
+
+<p>&#x2F;&#x2F; main.js  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import router from &quot;./router&quot;;       </span><br><span class="line">// 全局挂载路由    </span><br><span class="line">new Vue(&#123;        router    &#125;).$mount(&quot;#app&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>&#x2F;&#x2F; App.vue    </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">        &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">            &lt;router-link to=&quot;/&quot;&gt;Home&lt;/router-link&gt;</span><br><span class="line">            &lt;router-link to=&quot;/ablout&quot;&gt;About&lt;/router-link&gt;</span><br><span class="line">            // 路由展示区</span><br><span class="line">            &lt;router-view /&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/template&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>（3）路由参数</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">        path: &quot;/shopDetail&quot;,</span><br><span class="line">        name: &quot;shopDetail/:id&quot;,</span><br><span class="line">       component: () =&gt; import(/* webpackChunkName: &#x27;shopDetail&#x27; */ &quot;../views/shopDetail.vue&quot;)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p> &#x2F;&#x2F; shopDetail.vue</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// shopDetail.vue</span><br><span class="line">    &lt;template&gt;</span><br><span class="line">        &lt;div class=&quot;shop-detail&quot;&gt;</span><br><span class="line">            &lt;h1&gt;这是&#123;&#123; $route.params.id &#125;&#125;的商品详情页&lt;/h1&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/template&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>缺点：****这样在切换不同的参数时页面的钩子函数不会被重新调用</strong></p>
+<p><strong>解决：</strong> <strong>使用watch监听路由变化，做相关逻辑处理</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// shopDetail.vue</span><br><span class="line">    &lt;template&gt;</span><br><span class="line">        &lt;div class=&quot;shop-detail&quot;&gt;</span><br><span class="line">            &lt;h1&gt;这是&#123;&#123; $route.params.id &#125;&#125;的商品详情页&lt;/h1&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        export default &#123;</span><br><span class="line">            data() &#123;</span><br><span class="line">                return&#123;&#125;;</span><br><span class="line">            &#125;,</span><br><span class="line">            create() &#123;</span><br><span class="line">                console.log(&quot;钩子函数不会被触发&quot;)</span><br><span class="line">            &#125;,</span><br><span class="line">            watch: &#123;</span><br><span class="line">                // 监听路由变化，做相关逻辑处理</span><br><span class="line">                $route(to, from) &#123;</span><br><span class="line">                    console.log(to.params.id, from.path)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>7、路由嵌套</strong></p>
+<p><strong>children: []</strong></p>
+<p><strong>通过children来嵌套子路由</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// router/index.js</span><br><span class="line">    // 引入第三方依赖</span><br><span class="line">    import VueRouter from &#x27;vue-router;</span><br><span class="line">    // 路由注册</span><br><span class="line">    Vue.use(VueRouter)</span><br><span class="line">    </span><br><span class="line">    const routes = [&#123;</span><br><span class="line">        path: &quot;/&quot;,</span><br><span class="line">        name: &quot;home&quot;,</span><br><span class="line">       component: Home</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        path: &quot;/about&quot;,</span><br><span class="line">        name: &quot;about&quot;,</span><br><span class="line">       component: () =&gt; import(/* webpackChunkName: &#x27;about&#x27; */ &quot;../views/About.vue&quot;),</span><br><span class="line">       // 子路由</span><br><span class="line">       children: [</span><br><span class="line">           &#123;</span><br><span class="line">               path: &#x27;/info&#x27;,</span><br><span class="line">               component: Info</span><br><span class="line">           &#125;,</span><br><span class="line">           &#123;</span><br><span class="line">               path: &#x27;/list&#x27;,</span><br><span class="line">               component: List</span><br><span class="line">           &#125;</span><br><span class="line">       ]</span><br><span class="line">    &#125;,&#123;</span><br><span class="line">        // 容错路由，必须放置在最末尾</span><br><span class="line">        path: &quot;**&quot;,</span><br><span class="line">        name: &quot;404&quot;,</span><br><span class="line">        component: Error</span><br><span class="line">    &#125;];</span><br><span class="line">    </span><br><span class="line">    // 创建router路有实例</span><br><span class="line">    const router = new VueRouter(&#123;</span><br><span class="line">        mode: &quot;history&quot;,</span><br><span class="line">        routes</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    export default router;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// About.vue</span><br><span class="line">    &lt;template&gt;</span><br><span class="line">        &lt;div id=&quot;about&quot;&gt;</span><br><span class="line">            &lt;router-link to=&quot;/about/info&quot;&gt;Info&lt;/router-link&gt;</span><br><span class="line">            &lt;router-link to=&quot;/about/list&quot;&gt;List&lt;/router-link&gt;</span><br><span class="line">            // 路由展示区</span><br><span class="line">            &lt;router-view /&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/template&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>8、编程式导航</strong></p>
+<p><strong>除了上面用到的<router-link to>可以进行页面跳转外，还可以通过编程式导航的方式进行页面跳转</router-link></strong></p>
+<p> this.$router.push(“路由名”)</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">eg:</span><br><span class="line">    this.$router.push(&quot;about&quot;)</span><br><span class="line">    this.$router.push(&#123;</span><br><span class="line">        name: &quot;about&quot;,</span><br><span class="line">        params: &#123;</span><br><span class="line">            id: 1</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    this.$router.replace(&quot;about&quot;)</span><br><span class="line">    // 重定向</span><br><span class="line">    this.$router.redirect(&quot;about&quot;)</span><br><span class="line">    // 前后跳转</span><br><span class="line">    router.go(n) </span><br></pre></td></tr></table></figure>
+
+<p><strong>9、Vue路由传参</strong></p>
+<p><strong>① query模式</strong></p>
+<p><strong>相当于GET传参，参数会出现在地址栏中</strong></p>
+<p>​        &#x2F;&#x2F; 传值        &#x2F;&#x2F; 声明式导航      </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;router-link to=&quot;&#123;path/name: &#x27;about&#x27;, query: &#123;id: 1&#125;&#125;&quot;&gt;About&lt;/router-link&gt; </span><br></pre></td></tr></table></figure>
+
+<p>​               &#x2F;&#x2F; 编程式导航       </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">this.$router.push(&#123;      </span><br><span class="line">	path/name: &quot;about&quot;,        </span><br><span class="line">	query: &#123; id: 2   &#125;  </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>​    &#x2F;&#x2F; About.vue        &#x2F;&#x2F; 取值     </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">this.$route.query.id</span><br></pre></td></tr></table></figure>
+
+<p><strong>缺点：</strong> <strong>必须要在routes路由表中配置对应的:id来接收参数，否则刷新页面就拿不到参数了</strong></p>
+<p><strong>② params模式</strong></p>
+<p><strong>相当于POST传参，参数不会出现在地址栏中</strong></p>
+<p> &#x2F;&#x2F; 传值        &#x2F;&#x2F; 声明式导航       </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;router-link to=&quot;&#123;name: &#x27;about&#x27;, params: &#123;id: 1&#125;&#125;&quot;&gt;About&lt;/router-link&gt; </span><br></pre></td></tr></table></figure>
+
+<p>​               &#x2F;&#x2F; 编程式导航        </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">this.$router.push(&#123;</span><br><span class="line">           name: &quot;about&quot;,</span><br><span class="line">           params: &#123;</span><br><span class="line">               id: 2</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>缺点：****只能用name引入路由</strong></p>
+<p><strong>10、路由守卫</strong></p>
+<p><strong>对路由进行拦截，检查，并做相关处理后放行</strong></p>
+<p><strong>（1）全局路由守卫钩子函数</strong> <strong>—— 对全局路由都起作用</strong></p>
+<p><strong>① beforeEach(to, from, next) ——</strong> <strong>适用于做权限控制</strong></p>
+<p><strong>next(); —— 正常放行</strong></p>
+<p><strong>next(false); —— 当有错误时，传入false值，取消路由导航</strong></p>
+<p><strong>next(“&#x2F;home”); —— 导航到指定页面</strong></p>
+<p><strong>next(error); —— 跳转到报错页面，需要与router.onError()来配套使用，监听error报错</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">beforeEach((to, from, next) =&gt; &#123;      </span><br><span class="line">    console.log(to, from, next);    </span><br><span class="line">    next();  </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>② afterEach</strong></p>
+<p><strong>可用于处理页面跳转后对页面进行初始化 &#x2F; 滚动到顶部等操作</strong>    </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">afterEach((to, from) =&gt; &#123;       </span><br><span class="line">console.log(to, from)  </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>（2）路由独享路由守卫钩子函数 ——</strong> <strong>只在某个路由内生效</strong></p>
+<p><strong>① beforeEnter</strong>  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">       path: &quot;/about&quot;,</span><br><span class="line">       name: &quot;about&quot;,</span><br><span class="line">       component: About,</span><br><span class="line">       beforeEach((to, from, next) =&gt; &#123;</span><br><span class="line">           console.log(to, from, next);</span><br><span class="line">           next();</span><br><span class="line">       &#125;)</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>（3）组件内钩子函数内的路由守卫钩子函数 ——</strong> <strong>只在某个组件内起作用</strong></p>
+<p><strong>① beforeRouteEnter</strong> </p>
+<p><strong>！！注意：****由于此时组件实例还没有被创建，因此不能使用this调用数据</strong></p>
+<p>​       </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">beforeRouteEnter((to, from, next) =&gt; &#123;          </span><br><span class="line">    console.log(to, from, next);    </span><br><span class="line">    next();     </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>② beforeRouteUpdate</strong></p>
+<p>​       </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">beforeRouteUpdate((to, from, next) =&gt; &#123;        </span><br><span class="line">    console.log(to, from, next);          </span><br><span class="line">    next();       </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>③ beforeRouteLeave</strong></p>
+<p>​      </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">beforeRouteLeave((to, from, next) =&gt; &#123;          </span><br><span class="line">    console.log(to, from, next);        </span><br><span class="line">    next();     </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>11、获取数据的时机</strong></p>
+<p><strong>（1）在created &#x2F; mounted中获取</strong></p>
+<p><strong>在导航完成之后获取数据可能会出现数据请求缓慢，数据加载不出来的问题；</strong></p>
+<p><strong>解决：****配合loading来提升用户体验</strong></p>
+<p><strong>（2）在路由守卫中获取数据，获取完成后直接next()进入页面</strong></p>
+<p><strong>在导航完成之前获取后台数据，可能会造成用户长时间停留在上一个页面的问题；</strong></p>
+<p><strong>解决：</strong> <strong>配合进度条来提升用户体验</strong></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">杨函数</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2021/03/22/VueRouter/">http://example.com/2021/03/22/VueRouter/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">title</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/04/19/Vue%E8%80%83%E5%AF%9F%E7%82%B9%E6%95%B4%E7%90%86/"><img class="prev-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Vue考察点整理</div></div></a></div><div class="next-post pull-right"><a href="/2020/01/19/vue1/"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">vue2</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar2.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">杨函数</div><div class="author-info__description">description</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xjj1573"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/xjj1573" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://www.cnblogs.com/jjSmileEveryDay/" target="_blank" title="CSDN"><i class="fa-book-open"></i></a><a class="social-icon" href="mailto:1055745223@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="tencent://AddContact/?fromId=45&amp;fromSubId=1&amp;subcmd=all&amp;uin=1055745223&amp;website=www.oicqzone.com" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="mailto:1055745223@qq.com" target="_blank" title="Email"><i class="fas fa-envelope-open-text"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/10/25/%E5%B1%B1%E6%B0%B4/" title="山水"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="山水"/></a><div class="content"><a class="title" href="/2022/10/25/%E5%B1%B1%E6%B0%B4/" title="山水">山水</a><time datetime="2022-10-25T06:22:08.000Z" title="发表于 2022-10-25 14:22:08">2022-10-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/10/25/3/" title="3"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="3"/></a><div class="content"><a class="title" href="/2022/10/25/3/" title="3">3</a><time datetime="2022-10-25T05:23:03.000Z" title="发表于 2022-10-25 13:23:03">2022-10-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/09/22/less/" title="less"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="less"/></a><div class="content"><a class="title" href="/2021/09/22/less/" title="less">less</a><time datetime="2021-09-22T14:47:41.000Z" title="发表于 2021-09-22 22:47:41">2021-09-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/08/29/react-%E6%9C%80%E6%96%B0Api/" title="react-最新Api"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="react-最新Api"/></a><div class="content"><a class="title" href="/2021/08/29/react-%E6%9C%80%E6%96%B0Api/" title="react-最新Api">react-最新Api</a><time datetime="2021-08-29T13:42:06.000Z" title="发表于 2021-08-29 21:42:06">2021-08-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/08/26/React%20Router/" title="React Router"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="React Router"/></a><div class="content"><a class="title" href="/2021/08/26/React%20Router/" title="React Router">React Router</a><time datetime="2021-08-26T12:34:02.000Z" title="发表于 2021-08-26 20:34:02">2021-08-26</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 杨函数</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

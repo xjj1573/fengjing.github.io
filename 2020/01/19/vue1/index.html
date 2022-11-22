@@ -1,0 +1,323 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>vue2 | title</title><meta name="author" content="杨函数"><meta name="copyright" content="杨函数"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="​                         安装： 1.直接script引入： &lt;!-- 开发环境版本，包含了有帮助的命令行警告 --&gt;&lt;script src&#x3D;&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;vue@2&#x2F;dist&#x2F;vue.js&quot;&gt;&lt;&#x2F;script&gt;  怎样校验是否引入vue？  console控制台输入vu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue2">
+<meta property="og:url" content="http://example.com/2020/01/19/vue1/index.html">
+<meta property="og:site_name" content="title">
+<meta property="og:description" content="​                         安装： 1.直接script引入： &lt;!-- 开发环境版本，包含了有帮助的命令行警告 --&gt;&lt;script src&#x3D;&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;vue@2&#x2F;dist&#x2F;vue.js&quot;&gt;&lt;&#x2F;script&gt;  怎样校验是否引入vue？  console控制台输入vu">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-01-18T16:07:53.000Z">
+<meta property="article:modified_time" content="2022-11-22T08:29:55.963Z">
+<meta property="article:author" content="杨函数">
+<meta name="twitter:card" content="summary"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2020/01/19/vue1/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'vue2',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2022-11-22 16:29:55'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar2.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">title</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">vue2</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">发表于</span><time datetime="2020-01-18T16:07:53.000Z" title="发表于 2020-01-19 00:07:53">2020-01-19</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="vue2"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>​                        </p>
+<p><strong>安装：</strong></p>
+<p>1.直接script引入：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!-- 开发环境版本，包含了有帮助的命令行警告 --&gt;</span><br><span class="line">&lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>怎样校验是否引入vue？  console控制台输入vue回车</p>
+<p><img src="clipboard.png" alt="img"></p>
+<ol start="2">
+<li><strong>npm 安装</strong></li>
+</ol>
+<p>创建目录，</p>
+<p>（npm init -y   初始化项目）</p>
+<p>npm install vue   安装vue</p>
+<p><strong>3.vue cli  命令行工具</strong></p>
+<p>Vue CLI需要node.js&gt;&#x3D;8.9版本(推荐8.11.0+)可以使用nvm或者nvm-windows在同一台电脑中管理多个Node版本</p>
+<p>命令：	npm install -g  @vue&#x2F;cli</p>
+<p>或者 </p>
+<p>yarn global add @vue&#x2F;cli</p>
+<p>使用： vue create   项目名  </p>
+<p>（</p>
+<p>2.9.6 初始化项目是用        vue init webpack my-project </p>
+<p>3.0以上 初始化项目是用    vue create my-project</p>
+<p>）</p>
+<p>4.bower</p>
+<p>bower install vue</p>
+<p>5.AMD模块加载器</p>
+<p>vue调试工具：Vue Devtools  ,安装谷歌版插件，页面右键单击检查，选择vue标签</p>
+<p><strong>vue实例</strong></p>
+<p>控制条输入app.message&#x3D;’jjfff’ 页面渲染内容也会变化</p>
+<p> 一开始没声明str，所以页面不会显示，控制台还会报警告提示str未定义，如果一开始不知道值可以先声明为null，  声明后便会被渲染到页面中</p>
+<p> <strong>Object</strong>.<strong>freeze</strong>(data);会进行属性冻结，阻止修改属性，控制台app.message&#x3D;’金峰’也会报错提示只读,也意味着响应系统无法再追踪变化。</p>
+<p>除了数据 property，Vue 实例还暴露了一些有用的实例 property 与方法。它们都有前缀 $，以便与用户定义的 property 区分开来。例如：</p>
+<p>app.$el   ,app.$data,加上$都可以拿到实例的属性和方法</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var data = &#123; a: 1 &#125;</span><br><span class="line">var vm = new Vue(&#123;</span><br><span class="line">  el: &#x27;#example&#x27;,</span><br><span class="line">  data: data</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">vm.$data === data // =&gt; true</span><br><span class="line">vm.$el === document.getElementById(&#x27;example&#x27;) // =&gt; true</span><br><span class="line"></span><br><span class="line">// $watch 是一个实例方法</span><br><span class="line">vm.$watch(&#x27;a&#x27;, function (newValue, oldValue) &#123;</span><br><span class="line">  // 这个回调将在 `vm.a` 改变后调用</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">        &#123;&#123;message&#125;&#125;</span><br><span class="line">    &lt;p&gt;&#123;&#123;str&#125;&#125;&lt;/p&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line"> &lt;script src=&quot;vue.js&quot;&gt; &lt;/script&gt;</span><br><span class="line"> &lt;script&gt;</span><br><span class="line">     const data=&#123;</span><br><span class="line">         message:&quot;我的第一个vue程序&quot;,</span><br><span class="line">         //str:null,  声明后便会被渲染到页面中</span><br><span class="line">     &#125;</span><br><span class="line">     //Object.freeze(data);</span><br><span class="line">     // 报错：vue.js:4643 Uncaught TypeError: Cannot assign to read only property &#x27;str&#x27; of object &#x27;#&lt;Object&gt;&#x27;</span><br><span class="line">    //at Vue.proxySetter [as str] (vue.js:4643:30)</span><br><span class="line">    //at demo1.html:25:13 */</span><br><span class="line">     const app=new Vue(&#123;</span><br><span class="line">        el:&quot;#app&quot;,</span><br><span class="line">        data:data,</span><br><span class="line">     &#125;)</span><br><span class="line">     app.$watch(&quot;message&quot;,function(newval,oldval)&#123;</span><br><span class="line">         console.log(newval,oldval)</span><br><span class="line">     &#125;);</span><br><span class="line">     app.str=&quot;新加的字符串str&quot;;</span><br><span class="line"> &lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>el:Vue实例挂载的元素节点,</p>
+<p><strong>生命周期：</strong></p>
+<p><strong>beforeCreate</strong>:在实例初始化之后,进行数据侦听和事件&#x2F;侦听器的配置之前同步调用。</p>
+<p><strong>created</strong>:在实例创建完成后被立即同步调用。在这一步中，实例已完成对选项的处理，意味着以下内容已被配置完毕：数据侦听、计算属性、方法、事件&#x2F;侦听器的回调函数。然而，挂载阶段还没开始，且 $el property 目前尚不可用。</p>
+<p><strong>beforeMount</strong>:在挂载开始之前被调用：相关的 render 函数首次被调用。该钩子在服务器端渲染期间不被调用。</p>
+<p><strong>mounted</strong>:实例被挂载后调用，这时 el 被新创建的 vm.$el 替换了。如果根实例挂载到了一个文档内的元素上，当 mounted 被调用时 vm.$el 也在文档内。</p>
+<p>注意 mounted 不会保证所有的子组件也都被挂载完成。如果你希望等到整个视图都渲染完毕再执行某些操作，可以在 mounted 内部使用 <a target="_blank" rel="noopener" href="https://cn.vuejs.org/v2/api/#vm-nextTick">vm.$nextTick</a>： 该钩子在服务器端渲染期间不被调用。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mounted: function () &#123;  </span><br><span class="line">    this.$nextTick(function () &#123;   </span><br><span class="line">    // 仅在整个视图都被渲染之后才会运行的代码  </span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>beforeUpdate</strong>:在数据发生改变后，DOM 被更新之前被调用。这里适合在现有 DOM 将要被更新之前访问它，比如移除手动添加的事件监听器。</p>
+<p>该钩子在服务器端渲染期间不被调用，因为只有初次渲染会在服务器端进行。</p>
+<p><strong>updated</strong>:在数据更改导致的虚拟 DOM 重新渲染和更新完毕之后被调用。</p>
+<p>当这个钩子被调用时，组件 DOM 已经更新，所以你现在可以执行依赖于 DOM 的操作。然而在大多数情况下，你应该避免在此期间更改状态。如果要相应状态改变，通常最好使用<a target="_blank" rel="noopener" href="https://cn.vuejs.org/v2/api/#computed">计算属性</a>或 <a target="_blank" rel="noopener" href="https://cn.vuejs.org/v2/api/#watch">watcher</a> 取而代之。</p>
+<p>注意，updated 不会保证所有的子组件也都被重新渲染完毕。如果你希望等到整个视图都渲染完毕，可以在 updated 里使用 <a target="_blank" rel="noopener" href="https://cn.vuejs.org/v2/api/#vm-nextTick">vm.$nextTick</a>：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">updated: function () &#123; </span><br><span class="line">	this.$nextTick(function () &#123;    </span><br><span class="line">    	//  仅在整个视图都被重新渲染之后才会运行的代码       </span><br><span class="line">    &#125;) </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>activated</strong>:被 keep-alive 缓存的组件激活时调用。该钩子在服务器端渲染期间不被调用。</p>
+<p><strong>deactivated</strong>:被 keep-alive 缓存的组件失活时调用。该钩子在服务器端渲染期间不被调用。</p>
+<p><strong>beforeDestory</strong>:实例销毁之前调用。在这一步，实例仍然完全可用。该钩子在服务器端渲染期间不被调用。</p>
+<p><strong>destoryed</strong>:实例销毁后调用。该钩子被调用后，对应 Vue 实例的所有指令都被解绑，所有的事件监听器被移除，所有的子实例也都被销毁。该钩子在服务器端渲染期间不被调用。</p>
+<p><strong>errorCaptured</strong>:在捕获一个来自后代组件的错误时被调用。此钩子会收到三个参数：错误对象、发生错误的组件实例以及一个包含错误来源信息的字符串。此钩子可以返回 false 以阻止该错误继续向上传播。</p>
+<p>你可以在此钩子中修改组件的状态。因此在捕获错误时，在模板或渲染函数中有一个条件判断来绕过其它内容就很重要；不然该组件可能会进入一个无限的渲染循环。</p>
+<p>ex:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const app = new Vue(&#123;</span><br><span class="line">        el: &quot;#app&quot;,</span><br><span class="line">        data: data,</span><br><span class="line">        beforeCreate() &#123;</span><br><span class="line">          //console.log(&quot;箭头函数this指向：&quot;, this);</span><br><span class="line">          console.log(&quot;beforeCreate创建前状态&quot;);</span><br><span class="line">          console.log(&quot;el  :&quot;, this.$el);</span><br><span class="line">          console.log(&quot;data  :&quot;, this.$data);</span><br><span class="line">          console.log(&quot;message  :&quot;, this.message);</span><br><span class="line">        &#125;,</span><br><span class="line">        created() &#123;</span><br><span class="line">          //console.log(&quot;箭头函数this指向：&quot;, this);</span><br><span class="line">          console.log(&quot;created创建完毕状态&quot;);</span><br><span class="line">          console.log(&quot;el  :&quot;, this.$el);</span><br><span class="line">          console.log(&quot;data  :&quot;, this.$data);</span><br><span class="line">          console.log(&quot;message  :&quot;, this.message);</span><br><span class="line">        &#125;,</span><br><span class="line">        beforeMount() &#123;</span><br><span class="line">          console.log(&quot;beforeMount挂载前状态&quot;);</span><br><span class="line">          console.log(&quot;el  :&quot;, this.$el);</span><br><span class="line">          console.log(&quot;data  :&quot;, this.$data);</span><br><span class="line">          console.log(&quot;message  :&quot;, this.message);</span><br><span class="line">        &#125;,</span><br><span class="line">        mounted() &#123;</span><br><span class="line">          console.log(&quot;mounted挂载结束状态&quot;);</span><br><span class="line">          console.log(&quot;el  :&quot;, this.$el);</span><br><span class="line">          console.log(&quot;data  :&quot;, this.$data);</span><br><span class="line">          console.log(&quot;message  :&quot;, this.message);</span><br><span class="line">        &#125;,</span><br><span class="line">        beforeUpdate() &#123;</span><br><span class="line">          console.log(&quot;beforeUpdate更新前状态&quot;);</span><br><span class="line">          console.log(&quot;el  :&quot;, this.$el);</span><br><span class="line">          console.log(&quot;data  :&quot;, this.$data);</span><br><span class="line">          console.log(&quot;message  :&quot;, this.message);</span><br><span class="line">        &#125;,</span><br><span class="line">        update() &#123;</span><br><span class="line">          console.log(&quot;update更新完成状态&quot;);</span><br><span class="line">          console.log(&quot;el  :&quot;, this.$el);</span><br><span class="line">          console.log(&quot;data  :&quot;, this.$data);</span><br><span class="line">          console.log(&quot;message  :&quot;, this.message);</span><br><span class="line">        &#125;,</span><br><span class="line">        beforeDestroy() &#123;</span><br><span class="line">          console.log(&quot;beforeDestroy销毁前状态&quot;);</span><br><span class="line">          console.log(&quot;el  :&quot;, this.$el);</span><br><span class="line">          console.log(&quot;data  :&quot;, this.$data);</span><br><span class="line">          console.log(&quot;message  :&quot;, this.message);</span><br><span class="line">        &#125;,</span><br><span class="line">        destroyed() &#123;</span><br><span class="line">          console.log(&quot;destroyed销毁完成状态&quot;);</span><br><span class="line">          console.log(&quot;el  :&quot;, this.$el);</span><br><span class="line">          console.log(&quot;data  :&quot;, this.$data);</span><br><span class="line">          console.log(&quot;message  :&quot;, this.message);</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;);</span><br><span class="line">      </span><br><span class="line"> 箭头函数this指向： Vue &#123;_uid: 0, _isVue: true, $options: &#123;…&#125;, _renderProxy: </span><br><span class="line"> Proxy, _self: Vue, …&#125;     </span><br><span class="line">      beforeCreate创建前状态</span><br><span class="line">demo1.html:28 el  : undefined</span><br><span class="line">demo1.html:29 data  : undefined</span><br><span class="line">demo1.html:30 message  : undefined</span><br><span class="line">demo1.html:34 created创建完毕状态</span><br><span class="line">demo1.html:35 el  : undefined</span><br><span class="line">demo1.html:36 data  : &#123;__ob__: Observer&#125;</span><br><span class="line">demo1.html:37 message  : 我的第一个vue程序</span><br><span class="line">demo1.html:40 beforeMount挂载前状态</span><br><span class="line">demo1.html:41 el  : div#app</span><br><span class="line">demo1.html:42 div#app__vue__: null……………………</span><br><span class="line">demo1.html:44 message  : 我的第一个vue程序</span><br><span class="line">demo1.html:47 mounted挂载结束状态</span><br><span class="line">demo1.html:48 el  : div#app</span><br><span class="line">demo1.html:49 div#app</span><br><span class="line">demo1.html:50 data  : &#123;__ob__: Observer&#125;</span><br><span class="line">demo1.html:51 message  : 我的第一个vue程序</span><br><span class="line">demo1.html:54 beforeUpdate更新前状态</span><br><span class="line">demo1.html:55 el  : div#app</span><br><span class="line">demo1.html:56 data  : &#123;__ob__: Observer&#125;</span><br><span class="line">demo1.html:57 message  : 我的第一个vue程序</span><br><span class="line"></span><br><span class="line">可以在控制台输入app.$destroy()，便会触发beforeDestroy和destroy</span><br><span class="line">app.$destroy()</span><br><span class="line">demo1.html:64 beforeDestroy销毁前状态</span><br><span class="line">demo1.html:65 el  : &lt;div id=​&quot;app&quot;&gt;​…​&lt;/div&gt;​</span><br><span class="line">demo1.html:66 data  : &#123;__ob__: Observer&#125;</span><br><span class="line">demo1.html:67 message  : 我的第一个vue程序</span><br><span class="line">demo1.html:70 destroyed销毁完成状态</span><br><span class="line">demo1.html:71 el  : &lt;div id=​&quot;app&quot;&gt;​…​&lt;/div&gt;​</span><br><span class="line">demo1.html:72 data  : &#123;__ob__: Observer&#125;</span><br><span class="line">demo1.html:73 message  : 我的第一个vue程序</span><br><span class="line"></span><br><span class="line">如果beforeCreate改为箭头函数的话，this就指向window了，</span><br><span class="line">正常是不用箭头函数的，指向vue实例</span><br><span class="line"> beforeCreate:()=&gt; &#123;</span><br><span class="line">          console.log(&quot;箭头函数this指向：&quot;, this);</span><br><span class="line">          console.log(&quot;beforeCreate创建前状态&quot;);</span><br><span class="line">          console.log(&quot;el  :&quot;, this.$el);</span><br><span class="line">          console.log(&quot;data  :&quot;, this.$data);</span><br><span class="line">          console.log(&quot;message  :&quot;, this.message);</span><br><span class="line">        &#125;,</span><br><span class="line">箭头函数this指向： Window &#123;window: Window, self: Window, document: document,</span><br><span class="line"> name: &#x27;&#x27;, location: Location, …&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>组件基础</p>
+<ol>
+<li>组件组成：</li>
+</ol>
+<p>data，初始数据</p>
+<p>template，模板，dom</p>
+<p>methods</p>
+<p>watch&#x2F;computed</p>
+<p>生命周期</p>
+<p>props，接受外部的参数</p>
+<ol>
+<li><p>组件注册</p>
+</li>
+<li><ol>
+<li>组件名：xxx-xxx,buttonItem-&gt;button-item,注册时可以用驼峰式或小写字母＋短横线格式，引用时只能用短横线格式</li>
+<li>注册方式：</li>
+</ol>
+</li>
+</ol>
+<ul>
+<li><ul>
+<li><ul>
+<li><ul>
+<li><ul>
+<li><p>全局注册</p>
+</li>
+<li><ul>
+<li>Vue.<strong>component</strong>(“button-item”,{……}）父组件使用： &lt;button-item *v-bind:parent-val*&#x3D;”parentVal” v-on:*@child-event*&#x3D;”chileEvent”&gt;  </li>
+<li>缺点:即使不使用，（webpack）代码也会被打到生产包中</li>
+</ul>
+</li>
+<li><p>局部注册</p>
+</li>
+<li><ul>
+<li>用法：components:{<em>inputItem,</em> }</li>
+</ul>
+</li>
+<li><p>数据传递</p>
+</li>
+<li><ul>
+<li>props:默认单向绑定，父级-&gt;子级</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>组件传值</p>
+<ul>
+<li><p>父组件向子组件传值</p>
+</li>
+<li><ul>
+<li>1.props ,父组件：v-bind：，子组件：props:{msg:String,count:Number}</li>
+<li>2.$parent  严格意义上 不是值传递，取     不推荐，mounted中绑定值</li>
+</ul>
+</li>
+<li><p>子组件向父组件传值</p>
+</li>
+<li><ul>
+<li><p>$emit 推荐   子组件通过事件触发传值     父组件  v-on监听</p>
+</li>
+<li><ul>
+<li>子组件：this.$emit(“child-event”,this.msg)  ,父组件：v-on:child-event&#x3D;”xxxxx”</li>
+</ul>
+</li>
+<li><p>$chileren  不推荐    父组件：this.$ciildren[0]</p>
+</li>
+</ul>
+</li>
+<li><p>兄弟组件,非父子组件传值</p>
+</li>
+<li><ul>
+<li><p>1.bus中央事件总线  </p>
+</li>
+<li><ul>
+<li>将bus挂载到vue根实例的原型上,注册的bus及时销毁。非空的vue实例作为中央事件，结合实例方法 $on  $emit ,eg:发送：this.$bus.emit(xxxmethod,xxdata),接收：this.$bus.$on(xxxmethod,data&#x3D;&gt;{……})，销毁：<strong>beforeDestory</strong>(){ this.$bus.<strong>off</strong>(‘sendMsg’) },   Vue.prototype.$bus&#x3D;new Vue();  </li>
+<li>bus注册到vue跟对象上,import Vue from ‘vue’;const Bus&#x3D;new Vue();new Vue({el:’#app’,data:{data:{Bus}}})</li>
+<li>将bus抽离出来，组件有需要时引入    推荐 import Vue from ‘vue’;const Bus&#x3D;new Vue();export default Bus;</li>
+</ul>
+</li>
+<li><p>2.Vuex    状态管理  state状态管理</p>
+</li>
+<li><p>3.不是方法的方法  f父组件进行过度</p>
+</li>
+<li><ul>
+<li><p>使用：</p>
+</li>
+<li><ul>
+<li>子组件a通过事件emit传值给父组件</li>
+<li>父组件通过属性props传给子组件b</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>深层次嵌套，不确定嵌套多深</p>
+</li>
+<li><ul>
+<li>1.依赖注入 provide&#x2F;inject  不推荐直接用于应用程序代码中，  为高阶组件&#x2F;组件库提供用例</li>
+</ul>
+</li>
+<li><p>$attrs&#x2F;inheritAttrs      this.$attrs可以拿到v-bind绑定的所有属性，inheritAttrs默认为true</p>
+</li>
+</ul>
+<p> 设置inheritAttrs:false后，渲染后的代码就不会显示test1&#x3D;”test1”这种</p>
+<ul>
+<li><p>slot  插槽</p>
+</li>
+<li><ul>
+<li>父组件向子组件传递dom的一种方式</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">      &lt;button-item v-bind:parent-val=&quot;parentVal&quot;&gt; &lt;/button-item&gt;</span><br><span class="line">      &lt;button-item&gt; &lt;/button-item&gt;</span><br><span class="line">      &lt;input-item&gt;&lt;/input-item&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;script src=&quot;vue.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">      //全局组件</span><br><span class="line">      Vue.component(&quot;button-item&quot;,&#123;</span><br><span class="line">          data: function()&#123;</span><br><span class="line">              return &#123;</span><br><span class="line">                count:0</span><br><span class="line">              &#125;;</span><br><span class="line">          &#125;,</span><br><span class="line">         /*  data:&#123;  这种方式会报错</span><br><span class="line">            count:0</span><br><span class="line">          &#125;, */</span><br><span class="line">          props:[&#x27;parentVal&#x27;],</span><br><span class="line">          methods:&#123;</span><br><span class="line">            handleAdd()&#123;</span><br><span class="line">                this.count++;</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;,</span><br><span class="line">          watch:&#123;&#125;,</span><br><span class="line">          computed:&#123;&#125;,</span><br><span class="line">          beforeCreate()&#123;</span><br><span class="line"></span><br><span class="line">          &#125;,</span><br><span class="line">          created() &#123;</span><br><span class="line"></span><br><span class="line">          &#125;,</span><br><span class="line">          //template:&#x27;&lt;button v-on:click=&quot;handleAdd&quot;&gt;点击&#123;&#123;count&#125;&#125;&lt;/button&gt;&#x27;</span><br><span class="line">          template:&quot;&lt;div&gt;&lt;p&gt;我是button-item组件:&#123;&#123;parentVal&#125;&#125;&lt;/p&gt;&lt;input type=&#x27;text&#x27;  v-model=&#x27;parentVal&#x27; /&gt; &lt;/div&gt;&quot;,</span><br><span class="line">      &#125;);</span><br><span class="line">      //局部组件</span><br><span class="line">      const inputItem=&#123;</span><br><span class="line">        data:function()&#123;</span><br><span class="line">          return &#123;</span><br><span class="line">            inputVal:&#x27;我是inputItem-inputVal的初始值&#x27;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        template:&#x27;&lt;div&gt;&lt;p&gt;&#123;&#123;inputVal&#125;&#125;&lt;/p&gt;&lt;input type=&quot;text&quot;  v-model=&quot;inputVal&quot; /&gt; &lt;/div&gt;&#x27;,</span><br><span class="line">      &#125;;</span><br><span class="line">      //Object.freeze(data);</span><br><span class="line">      const app = new Vue(&#123;</span><br><span class="line">        el: &quot;#app&quot;,</span><br><span class="line">        data: &#123;</span><br><span class="line">          parentVal:&quot;我是父级的值&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        components:&#123;</span><br><span class="line">          //inputItem,  两种写法都可以</span><br><span class="line">          &quot;input-item&quot;:inputItem,</span><br><span class="line">        &#125;,</span><br><span class="line">       </span><br><span class="line">      &#125;);</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">  &lt;/body&gt;</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">杨函数</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2020/01/19/vue1/">http://example.com/2020/01/19/vue1/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">title</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/03/22/VueRouter/"><img class="prev-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">VueRouter</div></div></a></div><div class="next-post pull-right"><a href="/2020/01/14/%E4%BB%80%E4%B9%88%E6%98%AFjs/"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">什么是js</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar2.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">杨函数</div><div class="author-info__description">description</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xjj1573"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/xjj1573" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://www.cnblogs.com/jjSmileEveryDay/" target="_blank" title="CSDN"><i class="fa-book-open"></i></a><a class="social-icon" href="mailto:1055745223@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="tencent://AddContact/?fromId=45&amp;fromSubId=1&amp;subcmd=all&amp;uin=1055745223&amp;website=www.oicqzone.com" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="mailto:1055745223@qq.com" target="_blank" title="Email"><i class="fas fa-envelope-open-text"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/10/25/%E5%B1%B1%E6%B0%B4/" title="山水"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="山水"/></a><div class="content"><a class="title" href="/2022/10/25/%E5%B1%B1%E6%B0%B4/" title="山水">山水</a><time datetime="2022-10-25T06:22:08.000Z" title="发表于 2022-10-25 14:22:08">2022-10-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/10/25/3/" title="3"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="3"/></a><div class="content"><a class="title" href="/2022/10/25/3/" title="3">3</a><time datetime="2022-10-25T05:23:03.000Z" title="发表于 2022-10-25 13:23:03">2022-10-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/09/22/less/" title="less"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="less"/></a><div class="content"><a class="title" href="/2021/09/22/less/" title="less">less</a><time datetime="2021-09-22T14:47:41.000Z" title="发表于 2021-09-22 22:47:41">2021-09-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/08/29/react-%E6%9C%80%E6%96%B0Api/" title="react-最新Api"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="react-最新Api"/></a><div class="content"><a class="title" href="/2021/08/29/react-%E6%9C%80%E6%96%B0Api/" title="react-最新Api">react-最新Api</a><time datetime="2021-08-29T13:42:06.000Z" title="发表于 2021-08-29 21:42:06">2021-08-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/08/26/React%20Router/" title="React Router"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="React Router"/></a><div class="content"><a class="title" href="/2021/08/26/React%20Router/" title="React Router">React Router</a><time datetime="2021-08-26T12:34:02.000Z" title="发表于 2021-08-26 20:34:02">2021-08-26</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 杨函数</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

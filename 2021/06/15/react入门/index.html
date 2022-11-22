@@ -1,0 +1,381 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>react入门 | title</title><meta name="author" content="杨函数"><meta name="copyright" content="杨函数"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="react：用于构建用户界面的javascript库 react特点：   虚拟dom-不是真实的dom，在浏览器端js实现的一套dom api，底层通过dom diff算法，更新有差异化的部分。不会重新渲染整个页面，只更新变了的dom部分，大大提升页面渲染效率。   组件化-通过组件来开发应用。组件是能完成某个特定功能独立的可重用的代码，代码的可重用性非常高。若干个小组件构成更加复杂的UI。组件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="react入门">
+<meta property="og:url" content="http://example.com/2021/06/15/react%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:site_name" content="title">
+<meta property="og:description" content="react：用于构建用户界面的javascript库 react特点：   虚拟dom-不是真实的dom，在浏览器端js实现的一套dom api，底层通过dom diff算法，更新有差异化的部分。不会重新渲染整个页面，只更新变了的dom部分，大大提升页面渲染效率。   组件化-通过组件来开发应用。组件是能完成某个特定功能独立的可重用的代码，代码的可重用性非常高。若干个小组件构成更加复杂的UI。组件">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-06-14T16:20:14.000Z">
+<meta property="article:modified_time" content="2022-11-22T10:51:41.785Z">
+<meta property="article:author" content="杨函数">
+<meta name="twitter:card" content="summary"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2021/06/15/react%E5%85%A5%E9%97%A8/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'react入门',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2022-11-22 18:51:41'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar2.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">title</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">react入门</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">发表于</span><time datetime="2021-06-14T16:20:14.000Z" title="发表于 2021-06-15 00:20:14">2021-06-15</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="react入门"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong>react：用于构建用户界面的javascript库</strong></p>
+<p><strong>react特点</strong>：</p>
+<p>  虚拟dom-不是真实的dom，在浏览器端js实现的一套dom api，底层通过dom diff算法，更新有差异化的部分。不会重新渲染整个页面，只更新变了的dom部分，大大提升页面渲染效率。</p>
+<p>  组件化-通过组件来开发应用。组件是能完成某个特定功能独立的可重用的代码，代码的可重用性非常高。若干个小组件构成更加复杂的UI。组件逻辑使用js编写而非模板，使得状态与dom分离。</p>
+<p>  声明式-数据确定页面就确定，帮助节约大量dom操作代码。为应用每个状态设计简洁的视图，当数据改变时react能有效地更新并正确地渲染组件。</p>
+<p>  灵活-能和很多库灵活使用</p>
+<p>  高效-</p>
+<p>  面向对象化-</p>
+<p>  <strong>vue&amp;react</strong></p>
+<p>  react相对于vue来说react的灵活性和协作性更好一些</p>
+<p>  vue有丰富的api，实现起来简单快速</p>
+<p>  vue上手学习成本相对低</p>
+<p>  大型复杂项目还是比较推荐react</p>
+<p>npm install -g create-react-app</p>
+<p>create-react-app demo</p>
+<p>推荐使用自己搭脚手架，webpack</p>
+<p>启动：yarn start &#x2F;  npm  start</p>
+<p>package.json:webpack配置和项目包关联文件，项目中第三方依赖，命令配置。</p>
+<p>  script:</p>
+<p>​      eject:显示webpack目录-npm run eject ,执行后询问输入y,操作不可逆，执行完出现了config目录，包含webpack配置文件等，</p>
+<p>node_moudles:项目依赖包</p>
+<p>public：放公共文件</p>
+<p>src：源码目录  </p>
+<p>  App.css</p>
+<p>  App.js-跟组件</p>
+<p>  index.js-项目入口</p>
+<p>  index.css</p>
+<p><strong>JSX详解与实战</strong></p>
+<p>一切皆js  all in js</p>
+<p><strong>什么是JSX</strong> </p>
+<p>  推荐使用</p>
+<p>  Javascript  and XML</p>
+<p>  可拓展的标记性语言（自定义） 更易维护</p>
+<p>说明：JSX是react中的一项技术，不是全新的语言，js的扩展</p>
+<p><strong>JSX原理</strong></p>
+<p>  React.createElement()</p>
+<p>  只能有一个顶层元素（根元素）(vue也是)，exam：顶层元素不能有俩div</p>
+<p><strong>JSX具体用法</strong></p>
+<p>  遇到{ }当js解析，&lt;&gt;当html解析，小括号可省略</p>
+<p>  小驼峰命名 tabIndex  不能用tab-index  </p>
+<p>  dataid&#x3D;”1”是特列，不能用小驼峰</p>
+<p>  想换行一定要用括号包起来</p>
+<p>  import React,{Fragment} from ‘react’;</p>
+<p>  <Fragment>占位符,里面可写多个元素，</Fragment></p>
+<p>  不引入也可以用&lt;&gt;&lt;&#x2F;&gt;占位,版本16以上都可以用，省代码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function App() &#123;</span><br><span class="line">    const divTitle=&quot;我是app&quot;;</span><br><span class="line">    return (</span><br><span class="line">     &lt;&gt;</span><br><span class="line">      &lt;div title=&#123;divTitle&#125; className=&quot;App&quot; &gt;</span><br><span class="line">      &lt;h2 &gt;hello world2&lt;/h2&gt;</span><br><span class="line">     &lt;/div&gt;</span><br><span class="line">     &lt;/&gt;</span><br><span class="line">    );</span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><em>&#x2F;&#x2F;类组件</em>–另一种写法</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class App extends React.Component &#123;</span><br><span class="line">render() &#123;</span><br><span class="line">return (</span><br><span class="line">      &lt;div className=&quot;App&quot;&gt;</span><br><span class="line">  		&lt;h2&gt;hello world2&lt;/h2&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><em>浏览器中无法执行jsx代码文件，必须先转化为常规代码，就相当于编译的过程</em></p>
+<p>babel将jsx编译为正常代码，通过React.createElement()函数进行调用转化</p>
+<p><em>上面代码就相当于下面函数</em></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function App() &#123;</span><br><span class="line">    const divTitle=&quot;我是app&quot;;</span><br><span class="line">    const element = React.createElement(</span><br><span class="line">    &quot;div&quot;,</span><br><span class="line">    &#123; title: divTitle &#125;,</span><br><span class="line">    React.createElement(&quot;h2&quot;, null, &quot;hello world!&quot;)</span><br><span class="line">    );</span><br><span class="line">    return element;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>var person &#x3D; &lt;Person name&#x3D;{window.isLoggedIn ? window.name : ‘’} &#x2F;&gt;;</p>
+<p>上述代码通过JSX编译后会获得：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var person = React.createElement(</span><br><span class="line">    Person,</span><br><span class="line">    &#123;name: window.isLoggedIn ? window.name : &#x27;&#x27;&#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p><strong>基本语法</strong></p>
+<p><strong>标签类型</strong></p>
+<p>  dom标签  div p  首字母必须小写</p>
+<p>  自定义标签-组件  首字母必须大写，为了和dom标签进行区分,函数定义的时候也要大写</p>
+<p>  内联样式，比如divStyle，属性值要用’’引起来，属性名要用驼峰命名，如果写伪类的话这种样式就无能为力了</p>
+<p>表达式  ：  {}支持表达式，三元表达式，比如{divTitle}，{true?1:2}跟vue一样，不可以写对象，在style中可以用对象，</p>
+<p>ex：style&#x3D;{ {  color:’green’  } }</p>
+<p>  点击事件onClick 等都是驼峰形式</p>
+<p>注释</p>
+<p>  &#x2F;&#x2F;  ，&#x2F;* &#x2F;  都不起作用，都会被渲染到页面中，要用大括号包裹{&#x2F; *&#x2F;}</p>
+<p> 拓展运算符  </p>
+<p><strong>虚拟dom与非dom属性</strong></p>
+<p><strong>什么是虚拟dom (virtual dom)</strong></p>
+<p>  一大亮点</p>
+<p>  批处理 diff算法</p>
+<p>  dom操作成本高，伴随着大量的计算，浏览器压力越来越大，可能崩掉。</p>
+<p>  尽可能少的操作dom，提高渲染效率。</p>
+<p>大大提高渲染性能，解决了频繁操作dom的问题。</p>
+<p><img src="softwares\weixinobU7Vjqn5jGS9R5D5ZiwulHJQh0Y\f3e9c8657983457e8999ebafc23fbf60\329120315417.png" alt="img"></p>
+<p><strong>非dom属性以及如何使用</strong></p>
+<p>react实现了自己的一套独立于浏览器的dom系统，兼顾了性能和跨浏览器的兼容性。</p>
+<p>  <strong>dangerouslySetInnerHTML</strong> &#x3D;&#x3D;  相当于替代  InnerHTML   ，看名字警示我们危险操作</p>
+<p>使用规则：动态传递对象，html为key，html片段为值</p>
+<p>{__html:’</p><p>我是插入的html</p>‘}<p></p>
+<p>&#x2F;&#x2F; &lt;div dangerouslySetInnerHTML&#x3D;{ {__html:’</p><p>我是插入的html</p>‘} }&gt;<p></p>
+<p>  <strong>ref</strong>：</p>
+<p>相当于原生html中的id。</p>
+<p>不能在函数组件上使用，函数组件没有实例，用的话只能转成class组件。</p>
+<p>函数内部使用</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const userRef=React.createRef()</span><br><span class="line"></span><br><span class="line">&lt;Footer ref=&#123;userRef&#125;&gt;&lt;/Footer&gt;//类组件</span><br><span class="line"></span><br><span class="line">function handleClick()&#123;</span><br><span class="line"></span><br><span class="line"> console.log(&#x27;点击触发&#x27;,userRef)</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const inputRef=**React**.**createRef**()*//创建一个ref*</span><br><span class="line"></span><br><span class="line"> inputRef.current.**focus**();*//获取焦点</span><br></pre></td></tr></table></figure>
+
+<p><strong>key</strong>：</p>
+<p>​	提高渲染性能，唯一标志，尽量使用id      index不推荐，数组增删改查可能会造成隐患。</p>
+<p><strong>props(属性)介绍与应用</strong></p>
+<p><strong>什么是props</strong></p>
+<p>​	组件中最重要的是数据，   数据分为两种：props（属性）   state（状态），任何一个改变都会引发render函数的重新渲染。	</p>
+<p>父组件到子组件传值</p>
+<p>子组件到父组件怎么传值？</p>
+<p>  props接受任务类型的值，  子组件函数传参到父组件，间接实现传值</p>
+<p>子组件中： </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">handldAdd()&#123;</span><br><span class="line"></span><br><span class="line"> this.setState(state=&gt;(&#123;</span><br><span class="line"></span><br><span class="line">  count:++state.count</span><br><span class="line"></span><br><span class="line"> &#125;))</span><br><span class="line"></span><br><span class="line"> this.props.getChildData(this.state.count)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>父组件中：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> function getChildData(data)&#123;</span><br><span class="line"></span><br><span class="line"> console.log(&#x27;接收到子组件的值&#x27;,data)</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> &lt;Footer getChildData=&#123;getChildData&#125; ref=&#123;userRef&#125; &#123;...props&#125;&gt;&lt;/Footer&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>如何使用</strong></p>
+<p>​	父子组件传值，一般是父组件传过来的。</p>
+<p>两种方式，单独某个属性或者整个对象传过去</p>
+<p> const props&#x3D;{name:’金峰’,age:18}</p>
+<p>&lt;**User**  *name*&#x3D;”静静” *age*&#x3D;’28’ {…props} title&#x3D;{divTitle} &gt;&lt;&#x2F;**User**&gt;</p>
+<p>非字符串要用大括号包裹</p>
+<p>​	对外的接口    接受外部传入的数据    只读，子组件内不能直接修改</p>
+<p>​	react数据流单向的， 组件的复用   不可预测，所以不可修改，修改的话违背组件设计原则</p>
+<p>​	可借助中间人 state 来进行修改。先把props的值赋给state，再通过setState来改变state的值</p>
+<p>class Footer extends React.Component {</p>
+<p>&#x2F;&#x2F;构造器函数，如果没有声明，默认添加并执行， 初始化时只执行一次。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">constructor(props) &#123;</span><br><span class="line"></span><br><span class="line"> //es6固定写法</span><br><span class="line"></span><br><span class="line"> super(props);</span><br><span class="line"></span><br><span class="line"> //组件内部的状态 setState</span><br><span class="line"></span><br><span class="line"> this.state = &#123;</span><br><span class="line"></span><br><span class="line">  name1:props.name+&#x27;ww&#x27;</span><br><span class="line"></span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">render() &#123;</span><br><span class="line"></span><br><span class="line"> const &#123;name,age&#125;=this.props;</span><br><span class="line"></span><br><span class="line"> return (</span><br><span class="line"></span><br><span class="line">    &lt;div &gt;</span><br><span class="line"></span><br><span class="line">   &lt;h2&gt;我是类组件Footerhello world3&lt;/h2&gt;</span><br><span class="line"></span><br><span class="line">      &lt;p&gt;&#123;name&#125;==&#123;age&#125;==&#123;this.state.name1&#125;&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">  &lt;/div&gt;</span><br><span class="line"></span><br><span class="line"> );</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过定义方式分为两类：</p>
+<p>函数组件-只有props    有了之后，也可以使用state 。通过接收到props 将拿到的值，返回jsx元素 return出去</p>
+<p>类组件  -state 生命周期，有state就是有状态组件，没有就是无状态组件，如果没状态推荐转为函数组件，函数组件性能效率比类组件高，函数组件是无状态渲染，类组件有生命周期需要实例化等。组件名必须是大写，一定要继承React.Component.在类组件的render函数中来接受props的值，exam:const {name,age}&#x3D;this.props;</p>
+<p>如何设置默认值？用<strong>defaultProps</strong>，exam: User.defaultProps&#x3D;{ age:’78’}</p>
+<p><strong>事件监听this绑定</strong></p>
+<p><strong>this</strong> </p>
+<p>​	与执行上下文有关系，</p>
+<p>​	函数调用的时候：非严格模式下this指向全局的window对象，严格模式下会指向undefined</p>
+<p>​	作为方法调用：谁调用就指谁</p>
+<p>​	call，apply调用指向第一个参数</p>
+<p>react中 class创建的组件需要手动绑定this  主要是因为es6 class创建组件方式问题</p>
+<p>​	<strong>this四种绑定方式</strong></p>
+<p>1.constructor   bind  绑定  推荐   不会造成重复渲染的问题，只执行一次，this只会绑定一次</p>
+<p>exam:<em>this.handldAdd&#x3D;this.handldAdd.bind(this)</em></p>
+<p>2.直接在jsx元素进行绑定,存在一种问题，每次渲染组件都会创建一个新的函数，每次渲染都会执行一次，造成额外渲染，影响性能，不推荐。</p>
+<p>exam:<em>onClick</em>&#x3D;{this.<strong>handldAdd</strong>.<strong>bind</strong>(this)}</p>
+<p>3.使用箭头函数， es6类字段 ，指向this ，推荐   <strong>handldAdd</strong>&#x3D;()&#x3D;&gt;{}</p>
+<p>4.jsx箭头函数  jsx元素直接操作   不推荐    &lt;button *onClick*&#x3D;{()&#x3D;&gt;{this.<strong>handldAdd</strong>()}}&gt;</p>
+<p><strong>state(状态)介绍与应用</strong></p>
+<p><strong>什么是state</strong></p>
+<p>​	props  对外的接口  可读性</p>
+<p>​	state   组件内部的状态  控制元素的显示隐藏  可修改	</p>
+<p>​	setState来修改</p>
+<p>​    <strong>setState异步更新</strong>，不会立马映射更新组件，批量延迟更新 ，为了提高性能采取的一种措施。<strong>优化</strong>：多个setState调用，会进行合并 处理，连续多个set只会最后执行一次，不会导致组件重复渲染。 <strong>高效，不用考虑性能问题</strong>。把state更新对象放到一个队列里，在队列中把新的状态提取出来，再合并到state，最后触发render函数组件去重新渲染更新</p>
+<p>​			React控制的事件处理程序（onClick,onChange）  生命周期钩子函数  ,不会同步更新state，是异步的。</p>
+<p><strong>setState同步步更新</strong>:react控制之外  是同步更新的</p>
+<p>​			原生js绑定的事件  setTimeout等</p>
+<p><strong>如何使用</strong></p>
+<ol>
+<li>回调  函数</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">this.setState(state=&gt;(&#123;</span><br><span class="line"></span><br><span class="line">   count:++state.count</span><br><span class="line"></span><br><span class="line"> &#125;))</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>2.通过对象的方式     延迟更新</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">this.setState(&#123;isShow:!this.state.isShow&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>如果基于当前state想计算出新的值，就要采用函数的方式，因为他不是一个对象，可以确保每次调用的都是最新的state，相当于更改完了给你一个回调。</p>
+<p><strong>组件的state如何划分</strong></p>
+<p>​	state props 最终都会影响ui展示</p>
+<p>​	<strong>原则</strong></p>
+<p>​			1.让组件尽可能少状态 ，如果该组件只是进行ui渲染或者数据展示，没有复杂交互，应该使用props  ，不使用state ，使用function 函数组件 或者。无状态组件，ui组件， 函数式组件，  纯函数。无交互，无数据逻辑层的展示。</p>
+<p>​			2.随着时间产生变化的数据，页面有交互，    使用state class </p>
+<p><strong>props与state对比</strong></p>
+<p>1.组件内的数据，js对象，保存信息，控制组件的形态 ui</p>
+<p>2.props 父组件传入的，定义外部组件的接口   通过 类组件this.props或者函数内部 prop 进行使用</p>
+<p>3.props只读的，不能直接被修改，如果想修改可以用state</p>
+<p>4.state是组件内部的状态，作用范围仅限于当前组件，相当于私有变量。可以使用state来跟踪状态（控制元素的显示隐藏）</p>
+<p><strong>React 生命周期 组件</strong></p>
+<p>从创建到销毁的过程是生命周期</p>
+<p><img src="softwares\weixinobU7Vjqn5jGS9R5D5ZiwulHJQh0Y\6891531ac8254ce3964e81f8de3c30ec\330125538755.png" alt="img"></p>
+<p><img src="softwares\weixinobU7Vjqn5jGS9R5D5ZiwulHJQh0Y\1b42dddfd7154dc9bcf59a41e665d31e\330125626585.png" alt="img"></p>
+<p><strong>挂载阶段</strong></p>
+<p>constructor(props)  ：  需要接收父组件的props</p>
+<p>​	初始化操作，state,this绑定 </p>
+<p>componentWillMount   ：组件即将挂载，render之前调用，只会调用一次，很少被使用，在这里调用setState不会引起重新渲染，使用同步的setState,不会触发额外的render处理。 改名：UNSAFE_componentWillMount</p>
+<p>16.3 版本过时 ，被标记为不安全，但可一直使用  产生副作用，或者订阅</p>
+<p><strong>render</strong>：  唯一必要方法，其他都可以省略，就这个不能省略。返回一个react元素(state,props) 。 不负责组件的实际渲染工作，只是返回一个ui对象的描述</p>
+<p>真正负责渲染的是react自身的操作</p>
+<p>注意：必须是一个纯函数，在这里不能改变state，setState不能执行有任何副作用的操作。不能跟浏览器交互，交互应放在其它生命周期函数中。</p>
+<p>作用：1.计算props&#x2F;state 返回对应的结果</p>
+<ol start="2">
+<li>React.createElement 将jsx 转换为vdom对象模型</li>
+</ol>
+<p>componentDidMount：组件已经挂载完成</p>
+<p>组件挂载到dom后触发，只会调用一次，可以获取到真实的dom</p>
+<p>适合向服务端请求数据，</p>
+<p>1.可以保证获取到数据时组件已经处于挂载状态，直接操作dom。</p>
+<p>2.保证在任何情况下，只能调用一次，不会发送多余的数据请求</p>
+<p>react也可以在服务端渲染，会减少白屏时间，componentWillMount  会被调用两次，服务端调用一次，客户端调用一次。</p>
+<p>只能在浏览器端调用，服务器端无法调用，因为服务器端无法产生dom树</p>
+<p>调用setState会引起组件重新渲染</p>
+<p><strong>作用</strong></p>
+<p>​	数据可以获取到，真实dom也可以获取到</p>
+<p>​	可以进行数据请求，进行数据修改</p>
+<p>​	操作真实dom，第三方库的实例化</p>
+<p>挂载阶段挂载完后组件被渲染到页面上了</p>
+<p><strong>更新阶段</strong>（如果更改状态就会触发更新阶段）</p>
+<p>componentWillReceiveProps(nextProps)组件将要接收到props</p>
+<p>props引起的组件更新过程中触发，调用this.setState也不会触发</p>
+<p>只要父组件的render函数被调用，无论父组件传给子组件的props有没有改变，都会触发。官方建议getDerivedStateFromProps来代替这个钩子函数</p>
+<p>挂载阶段如果更新props是不会触发这个钩子函数</p>
+<p><strong>shouldComponentUpdate</strong> (nextProps,nextState)：如果返回false，render函数就不会被执行</p>
+<p>通知react组件是否更新，有权利阻止更新，</p>
+<p>尽量遵循默认行为，状态改变，组件就会被重新渲染。</p>
+<p>要求必须有返回结果</p>
+<p>可减少组件不必要的渲染，提高性能，优化</p>
+<p>注意：不能调用setState</p>
+<p>componentWillUpdate(nextProps,nextState)：将要更新，更新发生前执行，一般很少用，改名为：  UNSAFE_componentWillUpdate</p>
+<p>注意：不能调用setState，循环调用 相当于一个死循环，无法正常渲染。</p>
+<p>如果要改变的话可以使用componentWillReceiveProps 或者getDerivedStateFromProps</p>
+<p>componentDidUpdate(prevProps,prevState)更新完成调用</p>
+<p>有机会操作dom</p>
+<p>使用场景：判断是否发送网络请求</p>
+<p>无论父组件props状态更改还是state状态更改都会触发该方法</p>
+<p><strong>卸载阶段</strong>（如果没有更改最后就会触发卸载阶段）</p>
+<p>componentWillUnmount</p>
+<p>做一些清理工作： 清理定时器，取消网络请求，移除事件监听等</p>
+<p><strong>错误处理阶段</strong>  react16版本中增加的</p>
+<p>componentDidCatch(error,info)  ：捕获错误，info详细的报错信息</p>
+<p>getDerivedStateFromProps(props,state)  会在调用render方法之前调用，并且在初始挂载以及后续更新时都会被调用，它应返回一个对象来更新state，返回null则不更新任何内容</p>
+<p>适用于罕见用例：state的值在任何时候都取决于props</p>
+<p><strong>受控组件与非受控组件</strong></p>
+<p>受控于非受控是针对表单而言：</p>
+<p><strong>受控组件</strong></p>
+<p>​	依赖状态，默认值实时映射到状态-&gt;state</p>
+<p>​	必须使用onChange事件来进行数据更改，不然无法更改。与双向绑定类似</p>
+<p>​	每当表单状态发生变化时都会被写到组件的state中，叫做受控组件</p>
+<p>优点：  </p>
+<p>​	符合react的数据流</p>
+<p>​	修改使用更加方便，完全不需要获取dom</p>
+<p><strong>非受控组件</strong></p>
+<p>​	不依赖状态，不受控制 ，获取dom，操作dom</p>
+<p>​	很容易与第三方组件结合</p>
+<p>&lt;textarea。 &gt;</p>
+<p><strong>React中的事件和This</strong></p>
+<p><strong>React中的事件</strong> 直接写在jsx， on+EventType onClick onChange onBlur 驼峰式</p>
+<p><strong>事件监听this</strong> 1.constructor   bind  	 推荐 2.Es6 类字段 箭头函数	推荐 3.render 直接bind 4.render 箭头函数</p>
+<p><strong>事件传参</strong> 传递 id 索引，两种方式传参位置不一样 1.bind handleBtnClick(params,event) 2.箭头函数 handleBtnClick(event,params)</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">handleBtnClick(params,event,)&#123;</span><br><span class="line"></span><br><span class="line">  console.log(&#x27;我是传递的参数的值：&#x27;,params)</span><br><span class="line"></span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">handleBtnClick2(event,params)&#123;</span><br><span class="line"></span><br><span class="line">  console.log(&#x27;我是传递的参数的值：&#x27;,params)</span><br><span class="line"></span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">&lt;button onClick=&#123;this.handleBtnClick.bind(this,&#x27;bind传递的参数789&#x27;)&#125;&gt;</span><br><span class="line"></span><br><span class="line">​     bind传递参数&lt;/button&gt;</span><br><span class="line"></span><br><span class="line">&lt;button onClick=&#123;(e)=&gt;&#123;this.handleBtnClick2(e,&#x27;箭头函数传递的参数456&#x27;)&#125;&#125;&gt;</span><br><span class="line"></span><br><span class="line">​     箭头函数传递参数&lt;/button&gt;</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">杨函数</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2021/06/15/react%E5%85%A5%E9%97%A8/">http://example.com/2021/06/15/react入门/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">title</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/06/21/ReactHook/"><img class="prev-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">ReactHook</div></div></a></div><div class="next-post pull-right"><a href="/2021/04/22/Vuex/"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Vuex</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar2.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">杨函数</div><div class="author-info__description">description</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xjj1573"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/xjj1573" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://www.cnblogs.com/jjSmileEveryDay/" target="_blank" title="CSDN"><i class="fa-book-open"></i></a><a class="social-icon" href="mailto:1055745223@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="tencent://AddContact/?fromId=45&amp;fromSubId=1&amp;subcmd=all&amp;uin=1055745223&amp;website=www.oicqzone.com" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="mailto:1055745223@qq.com" target="_blank" title="Email"><i class="fas fa-envelope-open-text"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/10/25/%E5%B1%B1%E6%B0%B4/" title="山水"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="山水"/></a><div class="content"><a class="title" href="/2022/10/25/%E5%B1%B1%E6%B0%B4/" title="山水">山水</a><time datetime="2022-10-25T06:22:08.000Z" title="发表于 2022-10-25 14:22:08">2022-10-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/10/25/3/" title="3"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="3"/></a><div class="content"><a class="title" href="/2022/10/25/3/" title="3">3</a><time datetime="2022-10-25T05:23:03.000Z" title="发表于 2022-10-25 13:23:03">2022-10-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/09/22/less/" title="less"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="less"/></a><div class="content"><a class="title" href="/2021/09/22/less/" title="less">less</a><time datetime="2021-09-22T14:47:41.000Z" title="发表于 2021-09-22 22:47:41">2021-09-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/08/29/react-%E6%9C%80%E6%96%B0Api/" title="react-最新Api"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="react-最新Api"/></a><div class="content"><a class="title" href="/2021/08/29/react-%E6%9C%80%E6%96%B0Api/" title="react-最新Api">react-最新Api</a><time datetime="2021-08-29T13:42:06.000Z" title="发表于 2021-08-29 21:42:06">2021-08-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/08/26/React%20Router/" title="React Router"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="React Router"/></a><div class="content"><a class="title" href="/2021/08/26/React%20Router/" title="React Router">React Router</a><time datetime="2021-08-26T12:34:02.000Z" title="发表于 2021-08-26 20:34:02">2021-08-26</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 杨函数</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
