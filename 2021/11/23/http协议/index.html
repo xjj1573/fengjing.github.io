@@ -1,0 +1,230 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>http协议 | title</title><meta name="author" content="杨函数"><meta name="copyright" content="杨函数"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="要学到的内容：   两个二 1：分两端，服务端和客户端 2，两个动作，请求和响应 理解：谁发出了请求谁是客户端，谁响应这个请求谁是服务端。 动作不同，角色不也同 请求响应必须成对出现，不然意味着这次通信是失败的，没响应客户端会报错 不发请求不可能有响应  eeg: \1. 想访问google输入地址， 2.浏览器收到指令后首先要跨越网关（实际情况中也不一定就是网关，也可能是个代理之类的东西，可以">
+<meta property="og:type" content="article">
+<meta property="og:title" content="http协议">
+<meta property="og:url" content="http://example.com/2021/11/23/http%E5%8D%8F%E8%AE%AE/index.html">
+<meta property="og:site_name" content="title">
+<meta property="og:description" content="要学到的内容：   两个二 1：分两端，服务端和客户端 2，两个动作，请求和响应 理解：谁发出了请求谁是客户端，谁响应这个请求谁是服务端。 动作不同，角色不也同 请求响应必须成对出现，不然意味着这次通信是失败的，没响应客户端会报错 不发请求不可能有响应  eeg: \1. 想访问google输入地址， 2.浏览器收到指令后首先要跨越网关（实际情况中也不一定就是网关，也可能是个代理之类的东西，可以">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-11-23T09:32:31.000Z">
+<meta property="article:modified_time" content="2022-11-23T09:33:08.711Z">
+<meta property="article:author" content="杨函数">
+<meta name="twitter:card" content="summary"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2021/11/23/http%E5%8D%8F%E8%AE%AE/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'http协议',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2022-11-23 17:33:08'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar2.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">44</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">title</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">http协议</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">发表于</span><time datetime="2021-11-23T09:32:31.000Z" title="发表于 2021-11-23 17:32:31">2021-11-23</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="http协议"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><img src="softwares/weixinobU7Vjqn5jGS9R5D5ZiwulHJQh0Y/afeb18f25e8044b38122665cb90868bb/attachment.png" alt="W2.HTTP协议那些事（上）.pdf"></p>
+<p>要学到的内容：</p>
+<p><img src="softwares\weixinobU7Vjqn5jGS9R5D5ZiwulHJQh0Y\5eb6660219fa45f7b20c09d5b213fed9\clipboard.png" alt="img"></p>
+<p><img src="softwares\weixinobU7Vjqn5jGS9R5D5ZiwulHJQh0Y\7e5fef6cc5d649e1ae94695cda7a6288\clipboard.png" alt="img"></p>
+<p>两个二</p>
+<p>1：分两端，服务端和客户端</p>
+<p>2，两个动作，请求和响应</p>
+<p>理解：谁发出了请求谁是客户端，谁响应这个请求谁是服务端。</p>
+<p>动作不同，角色不也同</p>
+<p>请求响应必须成对出现，不然意味着这次通信是失败的，没响应客户端会报错</p>
+<p>不发请求不可能有响应</p>
+<p><img src="softwares\weixinobU7Vjqn5jGS9R5D5ZiwulHJQh0Y\63f29fbf3dd44e90a9a4a7ca87d0934a\clipboard.png" alt="img"></p>
+<p>eeg:</p>
+<p>\1. 想访问google输入地址，</p>
+<p>2.浏览器收到指令后首先要跨越网关（实际情况中也不一定就是网关，也可能是个代理之类的东西，可以理解为一个边界设备，作用：用来连接你的局域网和互联网）</p>
+<p>在这一步之前，图中一到二还省略了一部分，检查你的电脑有没有联网，检查局域网有没有入网</p>
+<p>往互联网上去发包来检查。看你有没有获得合法的ip。</p>
+<p>出了这个网之后实际上是dns解析请求出去了，第一步先去做dns，why？（因为我们在地址栏里输入的网址或者域名，他要找到域名对应的机器）计算机不认识我们输入的字符串，不知道代表哪台计算机，只认识数字。怎么把字符串转成数字？（在字符串和电脑之间做一个映射，电脑是通过ip来识别，IP地址在协议从下往上数第二层）ip地址在计算机内存里面占4个字节， 每一个字节都转化为一个数字，.点就是用来分隔每一个字节。域名和IP地址怎么对应？（key value的形式，域名对应ip，有一个映射关系，归dns服务器维护。）dns服务器收到域名之后去查它的ip，查到ip后再告诉你。这个动作本质上是计算机的底层去做的，浏览器只是在调相关的api。</p>
+<p>3.拿到IP地址后就开始发请求，发请求的过程也是很复杂的，因为我们的计算机和服务器不是一根网线连着的，这个时候用到了路由技术，互联网上有很多透明设备，最主要的就是路由器。作用：当你要向服务器发包的时候，由路由器帮你转发，经过一站又一站的转发，像驿站一样。路由器1发到路由器2，路由器2发到路由器3，。。路由器n发到服务器上来。我们不需要关心经过多少路由器以及路由器在什么地方。traceroute 加域名或ip能看到经过的路由，有时看不到路由的具体路径，出现星号，但看不到具体ip（其中某个路由把这个包封住了）  路由的术语：经过一个路由就叫一跳。</p>
+<p>4.包到达服务器后，有个设备要把请求分发到服务器上，就是反向代理服务器。经过反向代理转发后会到具体的服务器，服务器收到请求去处理，</p>
+<p>5.处理完后把处理结果给你。顺着原路返回，数据到了</p>
+<p>6.浏览器要加载处理完dom渲染页面等…</p>
+<p><img src="softwares\weixinobU7Vjqn5jGS9R5D5ZiwulHJQh0Y\55ceae0e60ad4240a89eb5f12b316a40\clipboard.png" alt="img"></p>
+<p>短连接：http协议在tcp协议上的基础上，tcp协议是一种面向链接的协议，就是说两个设备想通信，首先得建立tcp连接，通信完，要把tcp连接断开，这是底层协议。</p>
+<p>想发请求的时候必须先把TCP连接做好，在连接之上再发http的请求，服务器响应后tcp连接断开，</p>
+<p>每发一次请求响应，tcp连接要连接再断开一次，很消耗资源。？因为计算机里面 操作  最慢的是io,</p>
+<p>最快的是cpu，cpu一直在等io，大大拖慢了cpu的工作效率。 </p>
+<p><img src="softwares\weixinobU7Vjqn5jGS9R5D5ZiwulHJQh0Y\cf03b946923c43ec9a61293646edc09f\clipboard.png" alt="img"></p>
+<p>tcp&#x2F;ip协议第四层后来分为了数据链路层和物理层，变成五层协议</p>
+<p>先有的tcp&#x2F;ip，后有的ISO</p>
+<p><strong>传输层</strong>包含两个协议：TCP和UDP,负责承载数据。</p>
+<p>tcp面向连接，udp不面向连接。tcp是非常可靠的，设计目的：保证链路畅通可靠。tcp不仅管收发，还要保障包被对方收到，如果对方收不到必须给你一个反馈让你知道对方处理包的状态。</p>
+<p>udp不负责链路是否可靠，只负责把数据丢过去，不管对方收没收到，只管收发。</p>
+<p><strong>网络层</strong>：IP协议</p>
+<p>网络接口层：数据链路层：管mac地址，就是网卡地址     物理层：传输介质，电缆光缆无线电波等</p>
+<p>往下进行传输的时候，数据在程序这，程序要调用应用层协议，实际就是由应用层给数据打个包，</p>
+<p>要发数据的话要把数据用http协议包起来，往下层传，调用TCP协议把HTTP协议再包起来，再往下传，用到数据报协议，这个时候发的就是报文，用数据报协议把tcp的包包起来，再往下传，又用协议包起来，转成光信号或者电信号，这时候要在传输介质里进行传输，传输到对方以后，数据仍然是从物理层进来，数据包往上传，把本层的包扒掉，把包里的内容再往上传，一直扒掉一直传，最后传到对方的程序那得到的就是真正的数据。好处：这样在进行数据处理的时候非常清晰，每一层各司其职，出了问题或改动，不至于把整个大的栈破坏掉，设计科学</p>
+<p><img src="softwares\weixinobU7Vjqn5jGS9R5D5ZiwulHJQh0Y\ec8fa070bc3041cf8107c384953a966d\clipboard.png" alt="img"></p>
+<p><strong>http1和2的区别</strong>：http2用的是2进制封装，而http1用的是文本封装。</p>
+<p>怎么知道网站用的是1还是2？：控制台切到network，观察请求头，会发现围头（带冒号的，在http协议中不存在，但是要显示出来，可以断定是http2协议）</p>
+<p>http2解决了传输过程中的请求堵塞问题，但是还有对手堵塞问题，需要依靠http3来解决</p>
+<p>http和https是两个协议，https是在http协议之上加了一层加密，加密是嵌进去硬给塞进去的，http协议实现的时候还没有iso协议，应该放到会话层，但是当时还没有，导致应用层设计的比较混乱</p>
+<p>默认端口号：http 80    ，https  443</p>
+<p><img src="softwares\weixinobU7Vjqn5jGS9R5D5ZiwulHJQh0Y\8bdaa6ac18da486fb1c37a75ad1fed9c\clipboard.png" alt="img"></p>
+<p>事务：http事务分为四个步骤，只要有一个出现问题那就是失败</p>
+<p>特点：原子性：事务完成就是完成，没完成就是没完成，不能完成一半</p>
+<p><img src="softwares\weixinobU7Vjqn5jGS9R5D5ZiwulHJQh0Y\ecd8433abb344885a0f533b11a3f38cf\clipboard.png" alt="img"></p>
+<p><img src="softwares\weixinobU7Vjqn5jGS9R5D5ZiwulHJQh0Y\293b2d0a58f241cd8f189d88b4946d4b\clipboard.png" alt="img"></p>
+<p><img src="softwares\weixinobU7Vjqn5jGS9R5D5ZiwulHJQh0Y\0ee889b7aeaf47df9b2f7ef4f418d179\clipboard.png" alt="img"></p>
+<p>http1.1和之前的协议都是文本去承载的，里面是ASCII码.按照打印机规则加上了换行符</p>
+<p>&#x2F;n换行（next），&#x2F;r回车（return）。回车符让光标移到最前面，换行符让光标来到下一行。现在没必要一次用两个，冗余，现在都用换行符。   linux下回车换行都合并成了换行符，windows下还是回车符加换行符。</p>
+<p>http2使用的二进制，序列化</p>
+<p><img src="softwares\weixinobU7Vjqn5jGS9R5D5ZiwulHJQh0Y\4ebf43afb47248bbb572c1131d13cdd7\clipboard.png" alt="img"></p>
+<p>get，post最常见，区别</p>
+<p><img src="softwares\weixinobU7Vjqn5jGS9R5D5ZiwulHJQh0Y\55cc0157e6d0406b82f7cca9ba2f2fdf\clipboard.png" alt="img"></p>
+<p><img src="softwares\weixinobU7Vjqn5jGS9R5D5ZiwulHJQh0Y\823f9815c2a3471b97c4640b3fb64383\clipboard.png" alt="img"></p>
+<p>Accept：用于指定客户端接收哪些类型的信息</p>
+<p>Accept-Encoding:告诉服务器那边我这边是否接受数据压缩，压缩的是响应体，压缩后节省网络带宽</p>
+<p>Connection:keep-alive   意味着长连接，表示客户端要求服务器那边使用长连接，如果服务器那边支持长连接，也会返回一个这样的头。 如果不是keep-alive，意味着服务端不支持长连接，客户端就要按照短链接的套路去进行通信</p>
+<p>Cookie 把保持在本地的内容发给服务器，维持会话用</p>
+<p>DNT  不管，没太大意义</p>
+<p>Host:域名</p>
+<p>User-Agent :识别客户端环境</p>
+<p>Referer:该请求的上一个请求 ，为了解决源头问题，反爬虫措施会用到。 </p>
+<p><img src="softwares\weixinobU7Vjqn5jGS9R5D5ZiwulHJQh0Y\ed7921a4fba542c8a1acf2eea18e6449\clipboard.png" alt="img"></p>
+<p>Connection:对应请求头，若支持长连接则原样返回keep-alive</p>
+<p>Content-Encoding：对应请求头的Accept-Encoding,服务器收到压缩响应体的请求，就进行压缩，返回一个标记，收到数据后要做解压缩的操作</p>
+<p>Content-Type:描述响应体文件是什么样的格式</p>
+<p>Date ,Explres 都属于缓存策略 ,Explres :在这个时间之前是有效的，强制缓存</p>
+<p>Server:告诉客户端，服务端用的什么软件 </p>
+<p>Set-cookie：服务器向浏览器设置cookie</p>
+<p><img src="softwares\weixinobU7Vjqn5jGS9R5D5ZiwulHJQh0Y\6c3977b7292e4995a3495c650845f32e\clipboard.png" alt="img"></p>
+<p><img src="softwares\weixinobU7Vjqn5jGS9R5D5ZiwulHJQh0Y\f923624ea5fd4d6b8960ae8b32df621d\clipboard.png" alt="img"></p>
+<p>cookie在进行身份验证的时候就相当于服务器给你下发的一个凭据，凭据有效期记录在session里面，保存在于服务器端</p>
+<p>session可以理解为服务器端的一个小数据库，记录了发给客户端的凭据</p>
+<p><img src="softwares\weixinobU7Vjqn5jGS9R5D5ZiwulHJQh0Y\665f937de8384abda5004ae148f8f345\clipboard.png" alt="img"></p>
+<p>第一次访问cookie是没东西的，一古脑把本地网址对应东西全发过去。服务器一看没有cokkie，就给发了一个id过去，id通过Set-cookie这个头发到浏览器，浏览器收到把它保存到本地生成cookie文件。再次访问服务器的时候就要把本地cookie文件内容加到头上，放到cookie上.</p>
+<p><img src="softwares\weixinobU7Vjqn5jGS9R5D5ZiwulHJQh0Y\40f81a0805a14a00af9d377b415219c0\clipboard.png" alt="img"></p>
+<p><img src="softwares\weixinobU7Vjqn5jGS9R5D5ZiwulHJQh0Y\21ceb17fe9be4aca9bd03ff8677c9912\clipboard.png" alt="img"></p>
+<p>最重要的</p>
+<p>优点，目的： 减少响应延迟，减少网络带宽消耗（为了省钱）</p>
+<p>根据缓存策略再决定要不要保存在本地</p>
+<p><img src="softwares\weixinobU7Vjqn5jGS9R5D5ZiwulHJQh0Y\3c3fa189bfe44da7be5b7d73fb35a189\clipboard.png" alt="img"></p>
+<p>不同缓存策略决定后续要不要发出去</p>
+<p>1.强制缓存  ，Explres :在这个时间之前是有效的，强制缓存，以服务器时间为准</p>
+<p>2.协商缓存&#x2F;比较缓存  和服务器协商， 分为Etag策略和Last-Modified策略，可以单独用也可以同时用，etag优先级更高，etag通过文件的md5来判      断资源是否改变。 Last-Modified打上的标记是个时间戳，文件的生成时间。  md5更可靠，时间戳可以随意改（linux的touch命令，文件已存在就改变时间戳）</p>
+<p>强制缓存比 比较缓存优先级高</p>
+<p><img src="softwares\weixinobU7Vjqn5jGS9R5D5ZiwulHJQh0Y\7686ae3180cc4fdeb63bbc7d7adad93d\clipboard.png" alt="img"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">杨函数</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2021/11/23/http%E5%8D%8F%E8%AE%AE/">http://example.com/2021/11/23/http协议/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">title</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/04/23/1123/"><img class="prev-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">个人对vue响应式原理的理解</div></div></a></div><div class="next-post pull-right"><a href="/2021/10/23/eventloop%E6%80%BB%E7%BB%93/"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">eventloop总结</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar2.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">杨函数</div><div class="author-info__description">description</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">44</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xjj1573"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/xjj1573" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://www.cnblogs.com/jjSmileEveryDay/" target="_blank" title="CSDN"><i class="fa-book-open"></i></a><a class="social-icon" href="mailto:1055745223@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="tencent://AddContact/?fromId=45&amp;fromSubId=1&amp;subcmd=all&amp;uin=1055745223&amp;website=www.oicqzone.com" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="mailto:1055745223@qq.com" target="_blank" title="Email"><i class="fas fa-envelope-open-text"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/11/22/1122/" title="1122"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="1122"/></a><div class="content"><a class="title" href="/2022/11/22/1122/" title="1122">1122</a><time datetime="2022-11-22T14:11:36.000Z" title="发表于 2022-11-22 22:11:36">2022-11-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/10/25/%E5%B1%B1%E6%B0%B4/" title="山水"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="山水"/></a><div class="content"><a class="title" href="/2022/10/25/%E5%B1%B1%E6%B0%B4/" title="山水">山水</a><time datetime="2022-10-25T06:22:08.000Z" title="发表于 2022-10-25 14:22:08">2022-10-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/10/25/3/" title="3"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="3"/></a><div class="content"><a class="title" href="/2022/10/25/3/" title="3">3</a><time datetime="2022-10-25T05:23:03.000Z" title="发表于 2022-10-25 13:23:03">2022-10-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/04/23/1123/" title="个人对vue响应式原理的理解"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="个人对vue响应式原理的理解"/></a><div class="content"><a class="title" href="/2022/04/23/1123/" title="个人对vue响应式原理的理解">个人对vue响应式原理的理解</a><time datetime="2022-04-23T15:47:26.000Z" title="发表于 2022-04-23 23:47:26">2022-04-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/11/23/http%E5%8D%8F%E8%AE%AE/" title="http协议"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="http协议"/></a><div class="content"><a class="title" href="/2021/11/23/http%E5%8D%8F%E8%AE%AE/" title="http协议">http协议</a><time datetime="2021-11-23T09:32:31.000Z" title="发表于 2021-11-23 17:32:31">2021-11-23</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 杨函数</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>eventloop总结 | title</title><meta name="author" content="杨函数"><meta name="copyright" content="杨函数"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="浏览器中的eventloop  【01：16】js是单线程，服务于客服端。为了避免支持多线程可能出现一些复杂的问题。 【02：53】eventloop  由一个异步队列去实现 可以把非常耗时的任务放到异步队列里去执行，当它执行完后再把执行权转交给主线程，通过回调函数或者事件触发的方式，主线程重新唤起得到执行。 【03.47】图  分为三个部分 stack：栈，存放简单变量，包含函数执行逻辑，如果">
+<meta property="og:type" content="article">
+<meta property="og:title" content="eventloop总结">
+<meta property="og:url" content="http://example.com/2021/10/23/eventloop%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="title">
+<meta property="og:description" content="浏览器中的eventloop  【01：16】js是单线程，服务于客服端。为了避免支持多线程可能出现一些复杂的问题。 【02：53】eventloop  由一个异步队列去实现 可以把非常耗时的任务放到异步队列里去执行，当它执行完后再把执行权转交给主线程，通过回调函数或者事件触发的方式，主线程重新唤起得到执行。 【03.47】图  分为三个部分 stack：栈，存放简单变量，包含函数执行逻辑，如果">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-10-23T09:30:07.000Z">
+<meta property="article:modified_time" content="2022-11-23T09:31:53.345Z">
+<meta property="article:author" content="杨函数">
+<meta name="twitter:card" content="summary"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2021/10/23/eventloop%E6%80%BB%E7%BB%93/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'eventloop总结',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2022-11-23 17:31:53'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar2.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">44</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">title</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">eventloop总结</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">发表于</span><time datetime="2021-10-23T09:30:07.000Z" title="发表于 2021-10-23 17:30:07">2021-10-23</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="eventloop总结"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><ol>
+<li>浏览器中的eventloop</li>
+</ol>
+<p>【01：16】js是单线程，服务于客服端。为了避免支持多线程可能出现一些复杂的问题。</p>
+<p>【02：53】eventloop  由一个异步队列去实现</p>
+<p>可以把非常耗时的任务放到异步队列里去执行，当它执行完后再把执行权转交给主线程，通过回调函数或者事件触发的方式，主线程重新唤起得到执行。</p>
+<p>【03.47】图</p>
+<p><img src="softwares\weixinobU7Vjqn5jGS9R5D5ZiwulHJQh0Y\8c5e20dd630a465bab463e7ba4658fa6\clipboard.png" alt="img"></p>
+<p>分为三个部分</p>
+<p><strong>stack</strong>：栈，存放简单变量，包含函数执行逻辑，如果a调用b，栈ab都有，先执行a再执行b，先释放b再释放a。</p>
+<p><strong>heap</strong>：堆，存放复杂对象，方法，栈空间变量保存到堆空间的引用</p>
+<p>【4：58】如果栈空间执行的有异步事件的话，比如click（）、ajax、settimeout，里面的代码逻辑会放到异步队列任务中执行</p>
+<p>【5：28】异步队列中的任务何时触发？</p>
+<p>当栈空间（主线程）的一个同步任务完成后，就会去异步队列中看有没有执行完成的异步任务，如果有就会从队列的队首取第一个元素去执行，先进先出，先加入的先执行，整个页面处于循环状态。</p>
+<p>【7：08】异步队列分类</p>
+<p><img src="softwares\weixinobU7Vjqn5jGS9R5D5ZiwulHJQh0Y\8b457bfd3b1448be8cb7cf2c4d452919\clipboard.png" alt="img"></p>
+<p><img src="softwares\weixinobU7Vjqn5jGS9R5D5ZiwulHJQh0Y\9aecb2bb99bb420f8aa6d6e0bf71609e\c6e14e98dc5e6e94e4be8efaafdf575.png" alt="img"></p>
+<p>promise典型微任务</p>
+<p>【8：00】异步队列执行时，判断有没有微任务，有的话就执行完微任务队列再进行下一个宏任务</p>
+<p>【11：00】浏览器中的任务队列：</p>
+<p>宏任务：script, setTimeout, setInterval,requestAnimationFrame</p>
+<p>微任务：Promise(async),MutationObserver(主要用来处理dom)</p>
+<p>【12.30】练习题</p>
+<p>[12:46] 1:宏任务和微任务的执行顺序</p>
+<p>setTimeout(() &#x3D;&gt; {  console.log(“timeout”); }, 0); const promise &#x3D; new Promise(resolve &#x3D;&gt; {  console.log(“promise init”);  resolve(1);  console.log(“promise end”); }); promise.then(res &#x3D;&gt; {  console.log(“promise result:”, res); });</p>
+<p>答案：同步：promise init ，promise end，微任务：promise result:1，宏任务：timeout</p>
+<p>分析：</p>
+<p>宏任务队列：setTimeout</p>
+<p>微任务队列：Promise</p>
+<p>promise在他的构造函数中是一个同步的状态，先执行 console.log(“promise init”);， console.log(“promise end”);然后resolve就会触发他的微任务then方法执行（promise的then方法也返回一个promise对象），resolve传的参数会传到then方法中。</p>
+<p>[17:55] 2:宏任务微任务交错执行</p>
+<p>setTimeout(() &#x3D;&gt; {  console.log(“timeout1”);  Promise.resolve().then(() &#x3D;&gt; {   console.log(“promise1”);  }); }, 0); Promise.resolve().then(() &#x3D;&gt; {  console.log(“promise2”);  setTimeout(() &#x3D;&gt; {   console.log(“timeout2”);  }, 0); });</p>
+<p>答案：promise2  ，timeout1，promise1，timeout2</p>
+<p>[21:12] 3:async await 拆解</p>
+<p>async function fn() {  return await 1234;&#x2F;&#x2F;相当于  return Promise.resolve(1234) } fn().then(res &#x3D;&gt; console.log(res));</p>
+<p>答案：1234</p>
+<p>async function fn() {  return await ({   then(resolve) {     resolve(1234);   }  }); } fn().then(res &#x3D;&gt; console.log(res));</p>
+<p>答案：1234</p>
+<p>分析：</p>
+<p>&#x2F; 如果 await 后是一个简单类型，则进行 Promsie 包裹</p>
+<p>&#x2F;&#x2F; 如果 await 后是一个 thenable 对象，则不用进行 Promsie 包裹（chrome 的优化）</p>
+<p>如果promise resolve的是一个thenable，会递归使用promise.then调用，直到resolve返回值是一个基础类型</p>
+<p>[27:28] 4:使用async await 顺序判断（将 async await 转换成我们熟悉的 Promise）</p>
+<p>async function async1() {  console.log(“async1 start”);  &#x2F;&#x2F; 可转换  await async2();  console.log(“async1 end”);  &#x2F;&#x2F;  new Promise(resolve &#x3D;&gt; {  &#x2F;&#x2F;   console.log(“async2”)  &#x2F;&#x2F;   resolve()  &#x2F;&#x2F;  }).then(res &#x3D;&gt; console.log(“async1 end”)) } &#x2F;&#x2F;可以转换成上面注释代码 async function async2() {  console.log(“async2”); } async1(); console.log(‘script’)</p>
+<p>答案：async1 start，async2，script，async1 end</p>
+<p>【32：00】.5、如果 promise 没有 resolve 或 reject。</p>
+<p> async function async1 () {   console.log(‘async1 start’);    &#x2F;&#x2F;用await需要等待promise后面的状态变更，不管是resolve还是reject    &#x2F;&#x2F;等到结果才会继续往下执行，如果状态一直没变就一直在等，下面不会执行   await new Promise(resolve &#x3D;&gt; {    console.log(‘promise1’)      &#x2F;&#x2F;没有执行resolve（）导致promise永远没有完成      &#x2F;&#x2F;没完成，promise下面的永远不会得到执行   })   console.log(‘async1 success’);   return ‘async1 end’  }  console.log(‘srcipt start’)  async1().then(res &#x3D;&gt; console.log(res))  console.log(‘srcipt end’)</p>
+<p>答案：srcipt start ， async1 start，promise1，async1 end，srcipt end</p>
+<p>【35：19】6.某大厂真实面试题</p>
+<p>async function async1() {  console.log(“async1 start”);  await async2();  console.log(“async1 end”); } async function async2() {  console.log(“async2”); } console.log(“script start”); setTimeout(function() {  console.log(“setTimeout”); }, 0); async1(); new Promise(function(resolve) {  console.log(“promise1”);  resolve(); })  .then(function() {   console.log(“promise2”);  })  .then(function() {   console.log(“promise3”);  })  .then(function() {   console.log(“promise4”);  }); console.log(“script end”);</p>
+<p>第一次做错误答案：script start，async1 start，async1 end，async2，promise1，promise2，</p>
+<p>promise3，promise4，setTimeout，script end</p>
+<p>正确答案：</p>
+<p><img src="softwares\weixinobU7Vjqn5jGS9R5D5ZiwulHJQh0Y\59d797857137458188fd14c3360fb71e\clipboard.png" alt="img"></p>
+<p><img src="softwares\weixinobU7Vjqn5jGS9R5D5ZiwulHJQh0Y\536f1c6bbb354b9881586e04da76ff56\clipboard.png" alt="img"></p>
+<p>【40：53】7、resolve 处理 thenable ，也会包裹一层 promise。</p>
+<p>&#x2F;&#x2F; 普通的 function async2 &#x2F;&#x2F; return thenable 的 async2 &#x2F;&#x2F; async 的 async2 async function async1() {  console.log(“async1 start”);  return new Promise(resolve &#x3D;&gt; {   resolve(async2());&#x2F;&#x2F;rewolve处理thenable也会再包裹一层promise  }).then(() &#x3D;&gt; {   console.log(“async1 end”);  }); } function async2() {&#x2F;&#x2F;加上async后”async1 end”会跑到peomise6的后面，自己是个promise  console.log(“async2”);  &#x2F;&#x2F;如果改成 return {then(r){r()}}后”async1 end”会跑到peomise5的后面,比上面少包裹一层  &#x2F;&#x2F;如果改成 return 1 跟以前一样 } setTimeout(function() {  console.log(“setTimeout”); }, 0); async1(); new Promise(function(resolve) {  console.log(“promise1”);  resolve(); })  .then(function() {   console.log(“promise2”);  })  .then(function() {   console.log(“promise3”);  })  .then(function() {   console.log(“promise4”);  });</p>
+<p>答案：</p>
+<p><img src="softwares\weixinobU7Vjqn5jGS9R5D5ZiwulHJQh0Y\209dec0e8e0249b7b8c79d85bdb08f49\clipboard.png" alt="img"></p>
+<ol>
+<li>nodejs中的enentloop</li>
+</ol>
+<p>  【50：57】 nodejs怎么执行代码   nodejs流程图  </p>
+<p><img src="softwares\weixinobU7Vjqn5jGS9R5D5ZiwulHJQh0Y\f7c6906662c64865a9123f0618210549\clipboard.png" alt="img"></p>
+<p>比如说用js写的一个应用程序application，会先经过v8的编译，然后经过node的api去操作LIBUV,libuv是基于eventloop去实现的，会将所有的执行队列放到工作线程中去执行。当有一个工作完成后就会触发callback，回到nodoe的api，最后回到应用程序。</p>
+<p><strong>【总结】</strong></p>
+<p>js是单线程，故同时只能执行一个任务，eventloop是保证执行事件不阻塞的一个事件执行机制。</p>
+<p>js中分为同步任务和异步任务。异步任务又分为宏任务和微任务。</p>
+<p>js主线程在执行代码时，首先执行同步任务，然后执行异步任务。在按照代码顺序执行时，主线程执行同步代码，遇到异步代码，判断宏任务还是微任务，将其注册事件，分别加入宏任务队列和微任务队列，同步代码执行完毕后，判断微任务队列是否有事件，若有，将微任务队列所有事件执行完毕，在按照先进先出的顺序执行的一个宏任务事件。</p>
+<p>await 会让出线程，阻塞后面的代码执行，跳出执行外部的同步代码，执行完毕，会返回执行被阻塞的代码。</p>
+<p>顺序：script &gt;  process.nexttick  &gt; 微任务promise  await  &gt;settimeout setimmedate </p>
+<p><img src="softwares\weixinobU7Vjqn5jGS9R5D5ZiwulHJQh0Y\61c6b82f021f49f186f51d58e9f341c4\85ad613cafd438b29c31c5905d39d1b.png" alt="img"></p>
+<p>宏任务微任务区别：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/bfc3e319a96b">https://www.jianshu.com/p/bfc3e319a96b</a></p>
+<p>一次弄懂eventloop ：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/55511602">https://zhuanlan.zhihu.com/p/55511602</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">杨函数</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2021/10/23/eventloop%E6%80%BB%E7%BB%93/">http://example.com/2021/10/23/eventloop总结/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">title</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/11/23/http%E5%8D%8F%E8%AE%AE/"><img class="prev-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">http协议</div></div></a></div><div class="next-post pull-right"><a href="/2021/09/23/%E6%89%8B%E5%86%99promise/"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">手写promise</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar2.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">杨函数</div><div class="author-info__description">description</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">44</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xjj1573"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/xjj1573" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://www.cnblogs.com/jjSmileEveryDay/" target="_blank" title="CSDN"><i class="fa-book-open"></i></a><a class="social-icon" href="mailto:1055745223@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="tencent://AddContact/?fromId=45&amp;fromSubId=1&amp;subcmd=all&amp;uin=1055745223&amp;website=www.oicqzone.com" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="mailto:1055745223@qq.com" target="_blank" title="Email"><i class="fas fa-envelope-open-text"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/11/22/1122/" title="1122"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="1122"/></a><div class="content"><a class="title" href="/2022/11/22/1122/" title="1122">1122</a><time datetime="2022-11-22T14:11:36.000Z" title="发表于 2022-11-22 22:11:36">2022-11-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/10/25/%E5%B1%B1%E6%B0%B4/" title="山水"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="山水"/></a><div class="content"><a class="title" href="/2022/10/25/%E5%B1%B1%E6%B0%B4/" title="山水">山水</a><time datetime="2022-10-25T06:22:08.000Z" title="发表于 2022-10-25 14:22:08">2022-10-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/10/25/3/" title="3"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="3"/></a><div class="content"><a class="title" href="/2022/10/25/3/" title="3">3</a><time datetime="2022-10-25T05:23:03.000Z" title="发表于 2022-10-25 13:23:03">2022-10-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/04/23/1123/" title="个人对vue响应式原理的理解"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="个人对vue响应式原理的理解"/></a><div class="content"><a class="title" href="/2022/04/23/1123/" title="个人对vue响应式原理的理解">个人对vue响应式原理的理解</a><time datetime="2022-04-23T15:47:26.000Z" title="发表于 2022-04-23 23:47:26">2022-04-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/11/23/http%E5%8D%8F%E8%AE%AE/" title="http协议"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="http协议"/></a><div class="content"><a class="title" href="/2021/11/23/http%E5%8D%8F%E8%AE%AE/" title="http协议">http协议</a><time datetime="2021-11-23T09:32:31.000Z" title="发表于 2021-11-23 17:32:31">2021-11-23</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 杨函数</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
